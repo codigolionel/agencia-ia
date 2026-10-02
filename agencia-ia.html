@@ -1,0 +1,2619 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo empezar tu propia agencia de IA, paso a paso · la guía</title>
+<meta name="description" content="Guía práctica para empezar tu agencia de IA: qué es, qué vender, cómo te llegan los clientes, cómo los cerrás y la entrega de servicio. Con tu hoja de ruta según desde dónde arrancás.">
+<meta name="theme-color" content="#05050a">
+<meta property="og:title" content="Cómo empezar tu propia agencia de IA, paso a paso">
+<meta property="og:description" content="Cinco partes, cuatro hojas de ruta y el orden exacto para arrancar.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2305050a'/%3E%3Crect x='13' y='23' width='38' height='19' rx='9.5' fill='none' stroke='%23ff2bd1' stroke-width='4'/%3E%3Ccircle cx='47' cy='17' r='7' fill='%2325e5ff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#05050a', panel: '#0c0c14', tx: '#f4f4f7', tx2: '#a4a4b4',
+          mu: '#74748a', mag: '#ff2bd1', cy: '#25e5ff'
+        },
+        fontFamily: { disp: ['Outfit', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+      }
+    }
+  };
+</script>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+/* ==========================================================================
+   Guía Agencia de IA · hoja de estilos propia
+   Reglas de forma (una sola escala, documentada):
+     · tarjetas y paneles      -> 20px  (--r-card)
+     · bloques internos        -> 14px  (--r-soft)
+     · botones, chips, pildoras-> 999px (--r-pill)
+   Acentos: magenta = accion principal y numeros de seccion.
+            cyan    = detalles, enlaces, hover, barra de progreso.
+   Textura: sin fotos. Fondo negro con rejilla tenue y dos halos de color.
+   ========================================================================== */
+
+:root{
+  --ink:#05050a;
+  --ink-2:#0a0a12;
+  --panel:#0c0c14;
+  --panel-2:#12121d;
+  --line:rgba(255,255,255,.09);
+  --line-2:rgba(255,255,255,.17);
+  --tx:#f4f4f7;
+  --tx2:#a4a4b4;
+  --mu:#74748a;
+  --mag:#ff2bd1;
+  --mag-2:#ff79e5;
+  --mag-w:rgba(255,43,209,.12);
+  --cy:#25e5ff;
+  --cy-2:#96f4ff;
+  --cy-w:rgba(37,229,255,.10);
+  --bad:#f0757a;
+  --ok:#39e0a5;
+  --grad:linear-gradient(96deg,#ff2bd1 0%,#b45cff 48%,#25e5ff 100%);
+  --r-card:20px;
+  --r-soft:14px;
+  --r-pill:999px;
+  --f:'Outfit',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --m:'JetBrains Mono',ui-monospace,'SFMono-Regular',Consolas,monospace;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--tx);
+  font-family:var(--f);
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip; /* clip y no hidden: hidden rompe position:sticky en el encabezado */
+}
+/* fondo: rejilla + dos halos, fijos, sin costo de scroll */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 12% -6%,rgba(255,43,209,.20),transparent 62%),
+    radial-gradient(820px 520px at 92% 4%,rgba(37,229,255,.17),transparent 60%),
+    radial-gradient(700px 700px at 50% 110%,rgba(180,92,255,.12),transparent 65%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(circle at 50% 0%,#000 0%,transparent 78%);
+}
+
+a{color:inherit;text-decoration:none}
+p{margin:0 0 12px}
+p:last-child{margin-bottom:0}
+
+/* ---------- tipografia de seccion ---------- */
+.rotulo{
+  display:flex;align-items:center;gap:10px;
+  font:500 12px/1 var(--m);letter-spacing:.16em;text-transform:uppercase;color:var(--mu);
+}
+.rotulo b{font-weight:600;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rotulo.solo b{background:none;color:var(--cy)}
+.h2{margin:14px 0 0;font:700 clamp(30px,4.4vw,52px)/1.05 var(--f);letter-spacing:-.03em;max-width:22ch}
+.h3{margin:0 0 14px;font:700 clamp(21px,2.3vw,28px)/1.2 var(--f);letter-spacing:-.02em}
+.h4{margin:0 0 6px;font:700 18px/1.25 var(--f);letter-spacing:-.01em}
+.lead{margin:16px 0 0;max-width:66ch;font-size:17px;line-height:1.6;color:var(--tx2)}
+.clave{position:relative;white-space:nowrap}
+.clave::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.14em;background:var(--grad);border-radius:99px;opacity:.85}
+.grad-tx{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mono{font-family:var(--m)}
+.num{font:500 11.5px/1.3 var(--m);letter-spacing:.1em;text-transform:uppercase;color:var(--cy)}
+.chico{font-size:13.5px;color:var(--mu)}
+
+/* ---------- estructura ---------- */
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:0 20px}
+.sec{padding:78px 0 10px;scroll-margin-top:92px}
+.bloque{margin-top:42px}
+.franja{margin-top:26px;padding-top:26px;border-top:1px dashed var(--line-2)}
+
+/* ---------- tarjetas ---------- */
+.card{
+  position:relative;
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012)),var(--panel);
+  border:1px solid var(--line);border-radius:var(--r-card);padding:22px;
+}
+.card.soft{background:rgba(255,255,255,.025);border-radius:var(--r-soft);padding:16px 18px}
+.card.mag{border-color:rgba(255,43,209,.42);box-shadow:0 22px 70px -34px rgba(255,43,209,.75)}
+.card.cy{border-color:rgba(37,229,255,.38);box-shadow:0 22px 70px -34px rgba(37,229,255,.7)}
+.card.bad{border-color:rgba(240,117,122,.45);background:linear-gradient(180deg,rgba(240,117,122,.10),rgba(255,255,255,.012)),var(--panel)}
+.card.ok{border-color:rgba(57,224,165,.38);background:linear-gradient(180deg,rgba(57,224,165,.08),rgba(255,255,255,.012)),var(--panel)}
+.card p{font-size:15px;color:var(--tx2)}
+.card p b,.card p strong{color:var(--tx)}
+a.card{transition:border-color .3s var(--ease),transform .3s var(--ease),background .3s var(--ease)}
+a.card:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.ico{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;border:1px solid var(--line-2);font-size:20px;color:var(--cy)}
+.ico.mag{color:var(--mag);border-color:rgba(255,43,209,.4)}
+
+/* ---------- pildoras y botones ---------- */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:var(--r-pill);
+  border:1px solid var(--line-2);font:500 11.5px/1 var(--m);letter-spacing:.08em;text-transform:uppercase;color:var(--tx2);
+}
+.chip.mag{color:var(--mag-2);border-color:rgba(255,43,209,.45);background:var(--mag-w)}
+.chip.cy{color:var(--cy-2);border-color:rgba(37,229,255,.4);background:var(--cy-w)}
+.chip.ok{color:var(--ok);border-color:rgba(57,224,165,.4);background:rgba(57,224,165,.08)}
+.chip.bad{color:#ffb3b6;border-color:rgba(240,117,122,.45);background:rgba(240,117,122,.1)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;
+  border-radius:var(--r-pill);border:1px solid transparent;font:600 15px/1 var(--f);cursor:pointer;
+  transition:transform .2s var(--ease),filter .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease);
+}
+.btn:active{transform:scale(.98)}
+.btn-p{background:var(--grad);color:#08080e;box-shadow:0 18px 46px -22px rgba(255,43,209,.9)}
+.btn-p:hover{filter:brightness(1.08)}
+.btn-g{background:rgba(255,255,255,.04);border-color:var(--line-2);color:var(--tx)}
+.btn-g:hover{border-color:var(--cy);color:var(--cy-2);background:var(--cy-w)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,.tick:focus-visible,[role="tab"]:focus-visible{
+  outline:2px solid var(--cy);outline-offset:3px;border-radius:8px;
+}
+
+/* ---------- navegacion ---------- */
+.barra{
+  position:sticky;top:0;z-index:60;height:68px;display:flex;align-items:center;
+  border-bottom:1px solid transparent;transition:background .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s;
+}
+.barra.pegada{background:rgba(5,5,10,.82);backdrop-filter:blur(16px) saturate(150%);border-color:var(--line)}
+.marca{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.marca i{width:9px;height:9px;border-radius:50%;background:var(--mag);box-shadow:0 0 0 4px rgba(255,43,209,.16),0 0 18px var(--mag)}
+.navlink{font-size:14.5px;color:var(--tx2);padding:8px 2px;transition:color .25s}
+.navlink:hover{color:var(--cy-2)}
+.tablilla{display:flex;gap:6px;align-items:center}
+.tablilla a{
+  padding:8px 12px;border-radius:var(--r-pill);font:500 13px/1 var(--m);color:var(--mu);
+  border:1px solid transparent;white-space:nowrap;transition:color .25s,border-color .25s,background .25s;
+}
+.tablilla a:hover,.tablilla a[aria-current="true"]{color:var(--tx);border-color:var(--line-2);background:rgba(255,255,255,.05)}
+.tablilla a[aria-current="true"]{color:var(--cy-2)}
+
+/* ---------- indice lateral ---------- */
+.marco{display:block}
+.indice{display:none}
+@media(min-width:1080px){
+  .marco{display:grid;grid-template-columns:208px minmax(0,1fr);gap:52px;align-items:start}
+  .indice{display:flex;flex-direction:column;gap:2px;position:sticky;top:92px;padding-top:8px}
+}
+.indice a{
+  display:flex;align-items:center;gap:10px;min-height:38px;padding:0 12px;border-radius:12px;
+  color:var(--mu);font-size:14px;transition:color .25s,background .25s;
+}
+.indice a b{width:22px;font:500 11px/1 var(--m);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.indice a:hover{color:var(--tx);background:rgba(255,255,255,.04)}
+.indice a[aria-current="true"]{color:#08080e;background:linear-gradient(96deg,var(--mag),var(--cy))}
+.indice a[aria-current="true"] b{background:none;color:#08080e}
+.indice-prog{margin:16px 12px 0;display:flex;flex-direction:column;gap:8px;font:500 11px/1.4 var(--m);color:var(--mu)}
+
+.prog{height:6px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.prog i{display:block;height:100%;width:0;border-radius:99px;background:var(--grad);transition:width .5s var(--ease)}
+
+/* ---------- portada ---------- */
+.hero{position:relative;padding:34px 0 8px}
+@media(min-width:1000px){
+  .hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:center;padding-top:52px;min-height:min(86dvh,760px)}
+}
+.hero-titulo{margin:18px 0 0;font:800 clamp(38px,6vw,72px)/1.02 var(--f);letter-spacing:-.045em}
+.hero-sub{margin:18px 0 0;max-width:52ch;font-size:17.5px;line-height:1.55;color:var(--tx2)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+
+/* el panel de la derecha: las tres cosas y la empresa */
+.panel{
+  position:relative;border:1px solid var(--line);border-radius:26px;padding:20px;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01)),rgba(10,10,18,.7);
+  box-shadow:0 40px 120px -60px rgba(37,229,255,.6);
+}
+.panel-fila{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.panel-item{
+  display:flex;flex-direction:column;gap:7px;padding:14px 12px;border-radius:var(--r-soft);
+  border:1px solid var(--line);background:rgba(255,255,255,.03);text-align:center;align-items:center;
+}
+.panel-item b{font-size:14.5px;line-height:1.25}
+.panel-item span{font:400 12px/1.35 var(--m);color:var(--mu)}
+.panel-item.cy{border-color:rgba(37,229,255,.35)}
+.panel-item.mag{border-color:rgba(255,43,209,.38)}
+.panel-puente{display:flex;align-items:center;justify-content:center;gap:10px;margin:12px 0;color:var(--mu);font:500 11.5px/1 var(--m);letter-spacing:.1em;text-transform:uppercase}
+.panel-empresa{
+  border:1px dashed rgba(37,229,255,.45);border-radius:var(--r-soft);background:var(--cy-w);
+  padding:14px;display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.panel-empresa span{
+  font-size:13px;font-weight:600;text-align:center;padding:10px 6px;border-radius:10px;
+  border:1px solid rgba(37,229,255,.28);background:rgba(5,5,10,.45);
+}
+
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:40px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stat{padding:16px 18px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.stat b{display:block;font:800 30px/1 var(--f);letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{display:block;margin-top:8px;font:400 12.5px/1.4 var(--m);color:var(--mu)}
+
+/* ---------- rejillas ---------- */
+.g2,.g3,.g4{display:grid;gap:14px}
+@media(min-width:720px){.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1080px){.g4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:720px) and (max-width:1079px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.g-centro{align-items:center;gap:30px}
+
+/* ---------- flujos numerados ---------- */
+.flujo{display:flex;flex-direction:column;gap:6px;margin-top:18px}
+.paso{
+  flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+  padding:18px 14px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028);
+}
+.paso .n{font:500 11px/1.3 var(--m);letter-spacing:.1em;text-transform:uppercase;color:var(--cy)}
+.paso b{font-size:16px;line-height:1.25}
+.paso i.ph{font-size:22px;color:var(--mu)}
+.paso span:last-child{font-size:13.5px;line-height:1.4;color:var(--tx2)}
+.paso.ok{border-color:rgba(57,224,165,.42);background:linear-gradient(180deg,rgba(57,224,165,.08),rgba(255,255,255,.02))}
+.paso.ok .n{color:var(--ok)}
+.flecha{display:flex;align-items:center;justify-content:center;color:var(--mu);font-size:18px;min-width:24px;min-height:20px}
+@media(min-width:780px){
+  .flujo{flex-direction:row;align-items:stretch}
+  .flujo .flecha i{transform:none}
+}
+@media(max-width:779px){.flujo .flecha i{transform:rotate(90deg)}}
+@media(min-width:1160px){.flujo.cinco{flex-direction:row;align-items:stretch}}
+@media(min-width:780px) and (max-width:1159px){.flujo.cinco{flex-wrap:wrap}.flujo.cinco .paso{flex:1 1 28%}}
+
+/* ---------- niveles S A B C D ---------- */
+.tier{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.tier-f{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;align-items:stretch}
+.tier-l{
+  display:grid;place-items:center;min-height:52px;border-radius:var(--r-soft);
+  font:700 22px/1 var(--m);color:var(--tx);border:1px solid var(--line);background:rgba(255,255,255,.05);
+}
+.t-s .tier-l{background:var(--grad);color:#08080e;border-color:transparent}
+.t-a .tier-l{background:rgba(37,229,255,.14);color:var(--cy-2);border-color:rgba(37,229,255,.45)}
+.t-b .tier-l{background:rgba(255,43,209,.12);color:var(--mag-2);border-color:rgba(255,43,209,.35)}
+.t-c .tier-l{color:var(--tx2)}
+.t-d .tier-l{background:rgba(240,117,122,.1);color:#ffb3b6;border-color:rgba(240,117,122,.35)}
+.tier-c{display:grid;gap:10px}
+@media(min-width:760px){.tier-c{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1180px){.tier-c{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tc{padding:14px 16px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028)}
+.t-s .tc{border-color:rgba(255,43,209,.3)}
+.t-d .tc{border-color:rgba(240,117,122,.28)}
+.tc b{display:block;font-size:16px;line-height:1.25}
+.tc span{display:block;margin-top:5px;font-size:14px;line-height:1.45;color:var(--tx2)}
+
+/* ---------- frases y notas ---------- */
+.frase{
+  margin:26px 0 0;max-width:62ch;padding-left:18px;border-left:2px solid transparent;
+  border-image:var(--grad) 1;font:600 clamp(17px,1.9vw,21px)/1.45 var(--f);
+}
+.frase.mag{border-image:none;border-left-color:var(--mag)}
+.frase.cy{border-image:none;border-left-color:var(--cy)}
+.nota{margin-top:16px;padding:16px 18px;border-radius:var(--r-soft);border:1px solid var(--line-2);background:rgba(255,255,255,.03);font-size:15.5px;color:var(--tx2)}
+.nota b{color:var(--tx)}
+.nota.cy{border-color:rgba(37,229,255,.35);background:var(--cy-w)}
+.nota.bad{border-color:rgba(240,117,122,.4);background:rgba(240,117,122,.08)}
+
+/* ---------- listas de resumen ---------- */
+.resumen{margin-top:44px}
+.resumen ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+@media(min-width:900px){.resumen ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.resumen li{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028)}
+.resumen li > i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--grad);position:relative}
+.resumen li > i::after{
+  content:"";position:absolute;left:8px;top:7px;width:9px;height:5px;
+  border-left:2px solid #08080e;border-bottom:2px solid #08080e;transform:rotate(-45deg);
+}
+.resumen b{display:block;font-size:15.5px}
+.resumen span{display:block;margin-top:4px;font-size:14px;color:var(--tx2)}
+
+/* ---------- chats de ejemplo ---------- */
+.chat{display:flex;flex-direction:column;gap:10px}
+.bub{max-width:88%;padding:12px 16px;border-radius:16px;font-size:15px;line-height:1.45}
+.bub.yo{align-self:flex-end;background:rgba(255,43,209,.16);border:1px solid rgba(255,43,209,.35)}
+.bub.el{align-self:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.bub.pie{align-self:center;max-width:100%;background:none;border:0;font:400 12px/1.4 var(--m);color:var(--mu)}
+
+/* ---------- kpi y barras ---------- */
+.kpi b{display:block;font:800 clamp(46px,6vw,66px)/1 var(--f);letter-spacing:-.045em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kpi span{display:block;margin-top:12px;max-width:34ch;font:400 13px/1.45 var(--m);color:var(--mu)}
+.barras{display:flex;flex-direction:column;gap:16px;margin-top:18px}
+.br-f{display:grid;gap:8px}
+@media(min-width:700px){.br-f{grid-template-columns:132px minmax(0,1fr);align-items:center;gap:16px}}
+.br-eti{font:500 11.5px/1.3 var(--m);letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.bar{display:flex;height:56px;border-radius:var(--r-soft);overflow:hidden;border:1px solid var(--line-2)}
+.bar i{display:flex;align-items:center;min-width:0;padding:0 16px;overflow:hidden;white-space:nowrap;font:700 clamp(13px,1.6vw,16px)/1.1 var(--f);font-style:normal}
+.bar i.mk{background:#f4f4f7;color:#08080e}
+.bar i.tc{min-width:56px;justify-content:center;padding:0 8px;background:linear-gradient(96deg,rgba(255,43,209,.3),rgba(37,229,255,.28));color:var(--cy-2);border-left:2px solid var(--cy)}
+.br-ley{display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14px;color:var(--tx2)}
+@media(min-width:700px){.br-ley{margin-left:148px}}
+.br-ley span{display:flex;align-items:center;gap:8px}
+.br-ley i{display:inline-block;width:14px;height:14px;border-radius:4px}
+.br-ley i.mk{background:#f4f4f7}
+.br-ley i.tc{background:linear-gradient(96deg,rgba(255,43,209,.45),rgba(37,229,255,.45));border:1px solid var(--cy)}
+
+/* barra de visualizaciones */
+.visitas{display:flex;flex-direction:column;gap:16px}
+.vis-f{display:flex;flex-direction:column;gap:9px;font:400 13px/1.4 var(--m);color:var(--mu)}
+.vis-f.on{color:var(--tx)}
+/* medidor del gráfico de visitas (nombre propio para no chocar con .barra del encabezado) */
+.medidor{height:11px;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+.medidor i{display:block;height:100%;border-radius:99px;background:rgba(255,255,255,.34)}
+.medidor.lit i{background:var(--grad)}
+
+/* ---------- rango / escalera ---------- */
+.rango{position:relative;display:grid;gap:12px;margin-top:18px}
+@media(min-width:760px){
+  .rango{grid-template-columns:repeat(3,minmax(0,1fr));padding-top:28px}
+  .rango::before{content:"";position:absolute;top:8px;left:0;right:16px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--mu),var(--cy))}
+  .rango::after{content:"";position:absolute;top:2px;right:0;border-left:14px solid var(--cy);border-top:7px solid transparent;border-bottom:7px solid transparent}
+}
+.rg-p{padding:16px 18px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028)}
+.rg-p b{display:block;font-size:17px}
+.rg-p span{display:block;margin-top:5px;font-size:14.5px;color:var(--tx2)}
+.rg-p.ok{border-color:rgba(37,229,255,.4)}
+.rg-p.ok b{color:var(--cy-2)}
+.crece{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+@media(min-width:760px){
+  .crece{grid-template-columns:repeat(4,minmax(0,1fr));align-items:end}
+  .crece li:nth-child(1){min-height:96px}
+  .crece li:nth-child(2){min-height:126px}
+  .crece li:nth-child(3){min-height:156px}
+  .crece li:nth-child(4){min-height:186px}
+}
+.crece li{display:flex;flex-direction:column;justify-content:flex-end;gap:7px;padding:16px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028)}
+.crece li span{font:500 11.5px/1.4 var(--m);letter-spacing:.09em;text-transform:uppercase;color:var(--mu)}
+.crece li b{font-size:16px}
+.crece li.ok{border-color:rgba(37,229,255,.4)}
+.crece li.ok span{color:var(--cy)}
+
+/* ---------- el camino (dos carriles) ---------- */
+.camino{display:flex;flex-direction:column;gap:18px}
+.cam-fila{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+@media(min-width:900px){.cam-fila{flex-direction:row;align-items:stretch}}
+.cam-n{
+  flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:7px;
+  padding:16px 14px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028);
+}
+.cam-n b{font-size:16px}
+.cam-n span{font-size:13.5px;color:var(--tx2)}
+.cam-n.cy{border-color:rgba(37,229,255,.4)}
+.cam-n.cy b{color:var(--cy-2)}
+.cam-n.mag{border-color:rgba(255,43,209,.4)}
+.cam-n.mag b{color:var(--mag-2)}
+.cam-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.cam-fila.aparte{padding-top:18px;border-top:1px dashed var(--line-2)}
+
+/* ---------- la suma final ---------- */
+.suma{display:flex;flex-direction:column;gap:10px}
+@media(min-width:1160px){.suma{flex-direction:row;align-items:stretch}}
+.suma-p{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:7px;padding:16px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.028)}
+.suma-p span{font:500 11px/1.3 var(--m);letter-spacing:.09em;text-transform:uppercase;color:var(--mu)}
+.suma-p b{font-size:15px;line-height:1.3}
+.suma-p.fin{background:var(--grad);border-color:transparent}
+.suma-p.fin span{color:rgba(8,8,14,.7)}
+.suma-p.fin b{color:#08080e}
+.suma-op{align-self:center;font:700 22px/1 var(--m);color:var(--mu)}
+
+/* ---------- la ecuacion del valor ---------- */
+.ecu{display:flex;flex-direction:column;gap:14px;margin-top:18px;padding:20px;border-radius:var(--r-card);border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.ecu-fila{display:flex;flex-direction:column;gap:10px}
+@media(min-width:760px){.ecu-fila{flex-direction:row;align-items:stretch}}
+.ecu-t{flex:1 1 0;display:flex;flex-direction:column;gap:5px;padding:14px 16px;border-radius:var(--r-soft);border:1px solid var(--line-2);background:rgba(255,255,255,.03)}
+.ecu-t i{font:500 11.5px/1 var(--m);font-style:normal;letter-spacing:.09em;text-transform:uppercase}
+.ecu-t b{font-size:16.5px}
+.ecu-t span{font-size:14px;color:var(--tx2)}
+.ecu-t.sube{border-color:rgba(255,43,209,.4)}
+.ecu-t.sube i{color:var(--mag-2)}
+.ecu-t.baja{border-color:rgba(37,229,255,.35)}
+.ecu-t.baja i{color:var(--cy-2)}
+.ecu-x{align-self:center;font:700 20px/1 var(--m);color:var(--mu)}
+.ecu-linea{height:2px;border-radius:99px;background:var(--grad);opacity:.7}
+
+/* ---------- hoja de ruta ---------- */
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.seg button{
+  min-height:44px;padding:0 18px;border-radius:var(--r-pill);cursor:pointer;
+  border:1px solid var(--line-2);background:rgba(255,255,255,.03);color:var(--tx2);
+  font:600 14.5px/1 var(--f);transition:color .25s,border-color .25s,background .25s,transform .2s var(--ease);
+}
+.seg button:hover{color:var(--tx);border-color:var(--cy)}
+.seg button:active{transform:scale(.98)}
+.seg button[aria-selected="true"]{background:var(--grad);border-color:transparent;color:#08080e}
+.ruta-cab{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+@media(min-width:900px){.ruta-cab{flex-direction:row;align-items:center;justify-content:space-between}}
+.ruta-cab-b{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.etapas{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
+.etapa{padding:20px;border-radius:var(--r-card);border:1px solid var(--line);background:rgba(255,255,255,.026)}
+.etapa.hecha{border-color:rgba(37,229,255,.4);background:linear-gradient(180deg,rgba(37,229,255,.06),rgba(255,255,255,.02))}
+.etapa-cab{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start}
+.etapa-n{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  font:700 15px/1 var(--m);color:#08080e;background:var(--grad);
+}
+.etapa.hecha .etapa-n{background:var(--ok)}
+.etapa-t{margin:0;font:700 19px/1.25 var(--f);letter-spacing:-.01em}
+.etapa-para{margin:5px 0 0;font-size:14.5px;color:var(--tx2)}
+.tareas{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+.tarea{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start}
+.tarea > span{font-size:15.5px;line-height:1.5;color:var(--tx2)}
+.tarea.hecha > span{color:var(--mu);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.25)}
+.tick{
+  width:26px;height:26px;border-radius:9px;cursor:pointer;padding:0;position:relative;
+  border:1px solid var(--line-2);background:rgba(255,255,255,.04);
+  transition:background .25s,border-color .25s,transform .2s var(--ease);
+}
+.tick:hover{border-color:var(--cy)}
+.tick:active{transform:scale(.92)}
+.tick::after{
+  content:"";position:absolute;left:8px;top:7px;width:9px;height:5px;
+  border-left:2px solid #08080e;border-bottom:2px solid #08080e;
+  transform:rotate(-45deg) scale(.5);opacity:0;transition:transform .25s var(--ease),opacity .25s;
+}
+.tick[aria-pressed="true"]{background:var(--grad);border-color:transparent}
+.tick[aria-pressed="true"]::after{opacity:1;transform:rotate(-45deg) scale(1)}
+.pasas{margin:16px 0 0;font-size:15px;color:var(--tx2)}
+.pasas b{color:var(--cy-2)}
+.sigue{
+  margin-top:18px;min-height:44px;padding:0 18px;border-radius:var(--r-pill);cursor:pointer;
+  border:1px solid rgba(37,229,255,.4);background:var(--cy-w);color:var(--cy-2);
+  font:600 14.5px/1 var(--f);transition:background .25s,transform .2s var(--ease);
+}
+.sigue:hover{background:rgba(37,229,255,.18)}
+.sigue:active{transform:scale(.98)}
+.total{font:500 12px/1 var(--m);color:var(--mu)}
+
+/* ---------- glosario ---------- */
+.buscador{
+  width:100%;max-width:420px;min-height:48px;padding:0 18px;border-radius:var(--r-pill);
+  border:1px solid var(--line-2);background:rgba(255,255,255,.035);color:var(--tx);font:400 15px/1 var(--f);
+}
+.buscador::placeholder{color:var(--mu)}
+.glos{display:grid;gap:12px;margin-top:22px}
+@media(min-width:700px){.glos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1080px){.glos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.glos-t{padding:16px 18px;border-radius:var(--r-soft);border:1px solid var(--line);background:rgba(255,255,255,.026)}
+.glos-t dt{font:600 15.5px/1.3 var(--f);color:var(--cy-2)}
+.glos-t dd{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--tx2)}
+.glos-vacio{margin-top:22px;font-size:15px;color:var(--mu)}
+
+/* ---------- pie ---------- */
+.pie{margin-top:96px;border-top:1px solid var(--line);padding:34px 0 60px}
+.pie p{font-size:14px;color:var(--mu);max-width:70ch}
+
+/* Si el navegador no soporta recortar el degradado al texto, el texto quedaría
+   transparente (invisible). Ahí se usa el magenta/cyan plano. */
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){
+  .grad-tx,.rotulo b,.stat b,.kpi b,.indice a b,.glos-t dt{background:none !important;color:var(--mag) !important}
+  .indice a[aria-current="true"] b{color:#08080e !important}
+}
+
+/* ---------- animacion de entrada ----------
+   Sólo se oculta si el JS está activo (clase .js en <html>): sin JS o si el
+   observer falla, el contenido se ve igual. */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+
+.saltar{position:absolute;left:-9999px}
+.saltar:focus{left:16px;top:12px;z-index:99;padding:12px 18px;border-radius:var(--r-pill);background:var(--grad);color:#08080e;font-weight:600}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+
+/* ==========================================================================
+   Utilidades mínimas
+   Tailwind llega por CDN. Estas reglas repiten sólo las utilidades que usa la
+   página, para que la maqueta no se rompa si el CDN no carga (sin internet).
+   Si Tailwind carga, son idénticas y no cambian nada.
+   ========================================================================== */
+.block{display:block}
+.flex{display:flex}
+.grid{display:grid}
+.hidden{display:none}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.flex-wrap{flex-wrap:wrap}
+.text-center{text-align:center}
+.font-semibold{font-weight:600}
+.not-italic{font-style:normal}
+.overflow-x-auto{overflow-x:auto}
+.w-full{width:100%}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ml-2{margin-left:.5rem}
+.ml-auto{margin-left:auto}
+.mt-1{margin-top:.25rem}
+.mt-2{margin-top:.5rem}
+.mt-3{margin-top:.75rem}
+.mt-4{margin-top:1rem}
+.mt-5{margin-top:1.25rem}
+.mt-\[14px\]{margin-top:14px}
+.mt-\[22px\]{margin-top:22px}
+.mt-\[26px\]{margin-top:26px}
+.gap-1{gap:.25rem}
+.gap-3{gap:.75rem}
+.gap-4{gap:1rem}
+.gap-6{gap:1.5rem}
+.gap-7{gap:1.75rem}
+.py-2{padding-top:.5rem;padding-bottom:.5rem}
+.py-4{padding-top:1rem;padding-bottom:1rem}
+.max-w-\[70ch\]{max-width:70ch}
+.max-w-\[72ch\]{max-width:72ch}
+.text-mu{color:var(--mu)}
+.text-tx{color:var(--tx)}
+.text-\[12px\]{font-size:12px}
+.text-\[15px\]{font-size:15px}
+.text-\[17px\]{font-size:17px}
+.text-\[19px\]{font-size:19px}
+.text-\[20px\]{font-size:20px}
+.text-\[22px\]{font-size:22px}
+.text-\[24px\]{font-size:24px}
+.\!mt-0{margin-top:0 !important}
+.\!mt-4{margin-top:1rem !important}
+.\!px-4{padding-left:1rem !important;padding-right:1rem !important}
+.\!px-5{padding-left:1.25rem !important;padding-right:1.25rem !important}
+.\!text-\[14px\]{font-size:14px !important}
+.\!min-h-\[42px\]{min-height:42px !important}
+@media(min-width:640px){.sm\:inline-flex{display:inline-flex}}
+@media(min-width:768px){
+  .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .md\:text-right{text-align:right}
+  .md\:w-\[280px\]{width:280px}
+}
+@media(min-width:1024px){
+  .lg\:flex{display:flex}
+  .lg\:hidden{display:none}
+}
+
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div id="centinela" aria-hidden="true"></div>
+
+<!-- ===================== barra ===================== -->
+<header class="barra" id="barra">
+  <div class="wrap flex items-center gap-6">
+    <a class="marca" href="#inicio"><i aria-hidden="true"></i>agencia de IA <span class="mono text-mu text-[12px]">· guía</span></a>
+    <nav class="hidden lg:flex items-center gap-7 ml-2" aria-label="Secciones">
+      <a class="navlink" href="#que-es">Qué es</a>
+      <a class="navlink" href="#que-vender">Qué vender</a>
+      <a class="navlink" href="#te-llegan">Cómo te llegan</a>
+      <a class="navlink" href="#cerras">Cómo los cerrás</a>
+      <a class="navlink" href="#entrega">La entrega</a>
+      <a class="navlink" href="#glosario">Glosario</a>
+    </nav>
+    <div class="ml-auto flex items-center gap-3">
+      <a class="btn btn-p hidden sm:inline-flex !min-h-[42px] !px-5 !text-[14px]" href="#ruta">Armá tu hoja de ruta</a>
+      <button class="btn btn-g lg:hidden !min-h-[42px] !px-4" id="nav-abrir" aria-expanded="false" aria-controls="nav-movil" aria-label="Abrir el menú">
+        <i class="ph ph-list text-[20px]" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="nav-movil" hidden class="lg:hidden" style="position:sticky;top:68px;z-index:55;background:rgba(5,5,10,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)">
+  <div class="wrap py-4 grid gap-1">
+    <a class="navlink py-2" href="#antes">00 · Antes de arrancar</a>
+    <a class="navlink py-2" href="#ruta">Tu hoja de ruta</a>
+    <a class="navlink py-2" href="#que-es">01 · Qué es</a>
+    <a class="navlink py-2" href="#que-vender">02 · Qué vender</a>
+    <a class="navlink py-2" href="#te-llegan">03 · Cómo te llegan</a>
+    <a class="navlink py-2" href="#cerras">04 · Cómo los cerrás</a>
+    <a class="navlink py-2" href="#entrega">05 · La entrega de servicio</a>
+    <a class="navlink py-2" href="#cinco-pasos">Los cinco pasos</a>
+    <a class="navlink py-2" href="#glosario">Glosario</a>
+  </div>
+</div>
+
+<div class="lg:hidden" style="position:sticky;top:68px;z-index:50;background:rgba(5,5,10,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)">
+  <div class="wrap"><nav class="tablilla py-2 overflow-x-auto" aria-label="Índice rápido">
+    <a href="#antes"><b class="mono">00</b> Antes</a>
+    <a href="#ruta"><b class="mono">→</b> Ruta</a>
+    <a href="#que-es"><b class="mono">01</b> Qué es</a>
+    <a href="#que-vender"><b class="mono">02</b> Qué vender</a>
+    <a href="#te-llegan"><b class="mono">03</b> Te llegan</a>
+    <a href="#cerras"><b class="mono">04</b> Cerrás</a>
+    <a href="#entrega"><b class="mono">05</b> Entrega</a>
+    <a href="#cinco-pasos"><b class="mono">✓</b> Pasos</a>
+    <a href="#glosario"><b class="mono">A</b> Glosario</a>
+  </nav></div>
+</div>
+
+<main id="contenido">
+<div class="wrap">
+
+  <!-- ===================== portada ===================== -->
+  <section class="hero" id="inicio">
+    <div>
+      <span class="chip mag reveal">Guía gratis · la clase, ampliada</span>
+      <h1 class="hero-titulo reveal">Cómo empezar tu propia <span class="grad-tx">agencia de IA</span>, paso a paso.</h1>
+      <p class="hero-sub reveal">Cinco partes, cuatro hojas de ruta y 67 tareas. Desde cero, y sin que sepas programar.</p>
+      <div class="hero-cta reveal">
+        <a class="btn btn-p" href="#ruta"><i class="ph ph-path" aria-hidden="true"></i>Armá tu hoja de ruta</a>
+        <a class="btn btn-g" href="#que-es">Ver las cinco partes</a>
+      </div>
+    </div>
+
+    <div class="panel reveal">
+      <div class="panel-fila">
+        <div class="panel-item">
+          <i class="ph ph-chat-circle-dots text-[22px] text-mu" aria-hidden="true"></i>
+          <b>El chat</b><span>para preguntar</span>
+        </div>
+        <div class="panel-item cy">
+          <i class="ph ph-code text-[22px]" style="color:var(--cy)" aria-hidden="true"></i>
+          <b>Claude Code y Codex</b><span>para construir</span>
+        </div>
+        <div class="panel-item mag">
+          <i class="ph ph-plugs-connected text-[22px]" style="color:var(--mag)" aria-hidden="true"></i>
+          <b>La API</b><span>para que ande solo</span>
+        </div>
+      </div>
+      <div class="panel-puente"><span>lo que construye, va adentro</span><i aria-hidden="true">↓</i></div>
+      <div class="panel-empresa">
+        <span>Agentes de IA</span>
+        <span>Automatizaciones que corren solas</span>
+        <span>En un servidor, las 24 horas</span>
+      </div>
+      <p class="chico mt-4 text-center">ChatGPT para preguntar · Claude Code para construir · la API para que ande solo.</p>
+    </div>
+  </section>
+
+  <div class="stats reveal">
+    <div class="stat"><b>+50</b><span>proyectos en producción</span></div>
+    <div class="stat"><b>5</b><span>partes que se suman</span></div>
+    <div class="stat"><b>4</b><span>hojas de ruta</span></div>
+    <div class="stat"><b>67</b><span>tareas marcables</span></div>
+  </div>
+
+  <section class="sec" style="padding-top:56px">
+    <div class="g2 reveal">
+      <div class="card soft">
+        <span class="num">paso 1</span>
+        <p class="mt-3 font-semibold text-tx">Elegí desde dónde arrancás.</p>
+        <p class="mt-1">Te armo el orden: qué hacer primero y qué después.</p>
+      </div>
+      <div class="card soft">
+        <span class="num">paso 2</span>
+        <p class="mt-3 font-semibold text-tx">Marcá lo que vas haciendo.</p>
+        <p class="mt-1">Queda guardado en este navegador, para cuando vuelvas.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="marco">
+
+    <!-- ===================== indice ===================== -->
+    <aside class="indice" aria-label="Índice de la guía">
+      <a href="#antes"><b>00</b> Antes de arrancar</a>
+      <a href="#ruta"><b>→</b> Tu hoja de ruta</a>
+      <a href="#que-es"><b>01</b> Qué es</a>
+      <a href="#que-vender"><b>02</b> Qué vender</a>
+      <a href="#te-llegan"><b>03</b> Cómo te llegan</a>
+      <a href="#cerras"><b>04</b> Cómo los cerrás</a>
+      <a href="#entrega"><b>05</b> La entrega de servicio</a>
+      <a href="#cinco-pasos"><b>✓</b> Los cinco pasos</a>
+      <a href="#glosario"><b>A</b> Glosario</a>
+      <div class="indice-prog">
+        <span>tu progreso</span>
+        <div class="prog"><i id="indice-barra"></i></div>
+        <span id="indice-cuenta">0 de 0</span>
+      </div>
+    </aside>
+
+    <div>
+
+      <!-- ===================== 00 antes ===================== -->
+      <section class="sec" id="antes">
+        <div class="reveal">
+          <div class="rotulo"><b>00</b> antes de arrancar</div>
+          <h2 class="h2">Esto no es plata <span class="clave">fácil</span>.</h2>
+          <p class="lead">Hago estos videos porque es de lo que más me piden. Y justamente por eso, primero esto.</p>
+        </div>
+
+        <div class="bloque reveal">
+          <div class="card bad">
+            <div class="flex items-center justify-between gap-4 flex-wrap">
+              <span class="num" style="color:var(--mu)">lo que te venden</span>
+              <span class="chip bad">humo</span>
+            </div>
+            <p class="mt-5 text-[19px] font-semibold text-tx">«Tu agencia de IA andando en 60 minutos.»</p>
+            <p class="mt-2 text-[17px]">«Plata mientras dormís. Sin experiencia. Tu primer cliente esta semana.»</p>
+            <p class="mt-3 text-[15px]">Un curso, una plantilla y listo.</p>
+          </div>
+        </div>
+
+        <div class="g3 bloque">
+          <div class="card reveal">
+            <span class="num">uno</span>
+            <h3 class="h4 mt-3">No es rápido</h3>
+            <p>Los clientes tardan en llegar. Lo que trae gente, como YouTube, rinde a los meses, no a la semana.</p>
+          </div>
+          <div class="card reveal">
+            <span class="num">dos</span>
+            <h3 class="h4 mt-3">No es fácil</h3>
+            <p>Hay que aprender a armarlo, aprender a venderlo y cumplirle al que te pagó.</p>
+          </div>
+          <div class="card reveal">
+            <span class="num">tres</span>
+            <h3 class="h4 mt-3">Vas a tardar en ver resultados</h3>
+            <p>Y los primeros meses son los que más cuestan. Es el peaje.</p>
+          </div>
+        </div>
+
+        <div class="bloque grid gap-3 max-w-[72ch] reveal">
+          <p>Lo que sí es: <b class="text-tx">un oficio</b>. Tiene tres partes, y las tres se aprenden: armar lo que la empresa necesita, conseguir que te hablen y cerrar, y cumplirle al que te pagó para que te siga contratando.</p>
+          <p>La que más cuesta no es la técnica. Es la del medio. Por eso esta guía le dedica más lugar que a ninguna otra.</p>
+        </div>
+
+        <p class="frase reveal">Si te prometen plata en 60 minutos, no creas esa boludez. Lo bueno tarda mucho.</p>
+      </section>
+
+      <!-- ===================== hoja de ruta ===================== -->
+      <section class="sec" id="ruta">
+        <div class="reveal">
+          <div class="rotulo"><b>tu hoja de ruta</b> a medida</div>
+          <h2 class="h2">Elegí desde dónde <span class="clave">arrancás</span>.</h2>
+          <p class="lead">No todos arrancan del mismo lugar. Elegí el que más se parece a vos: te armo el orden y lo que tenés que hacer en cada etapa. Lo que vayas marcando queda guardado en este navegador.</p>
+        </div>
+
+        <div class="seg reveal" id="seg-ruta" role="tablist" aria-label="Desde dónde arrancás">
+          <button type="button" role="tab" data-ruta="cero" aria-selected="true" aria-controls="etapas">De cero</button>
+          <button type="button" role="tab" data-ruta="tecnico" aria-selected="false" aria-controls="etapas">Sé lo técnico</button>
+          <button type="button" role="tab" data-ruta="clientes" aria-selected="false" aria-controls="etapas">Ya tengo clientes</button>
+          <button type="button" role="tab" data-ruta="abasto" aria-selected="false" aria-controls="etapas">No doy abasto</button>
+        </div>
+
+        <div class="ruta-cab reveal">
+          <div class="ruta-cab-b">
+            <span class="chip cy" id="ruta-nombre">Arranco de cero</span>
+            <span class="total" id="ruta-cuenta">0 de 0</span>
+          </div>
+          <div class="w-full md:w-[280px]">
+            <div class="prog"><i id="ruta-barra"></i></div>
+          </div>
+        </div>
+        <p class="lead !mt-4" id="ruta-desc"></p>
+
+        <ol class="etapas" id="etapas"></ol>
+      </section>
+
+      <!-- ===================== 01 que es ===================== -->
+      <section class="sec" id="que-es">
+        <div class="reveal">
+          <div class="rotulo"><b>01</b> qué es</div>
+          <h2 class="h2">No es usar ChatGPT. Es meter la IA <span class="clave">adentro</span> de una empresa.</h2>
+          <p class="lead">Para entenderlo, hay que separar tres cosas que la gente mezcla. Son distintas, y cada una sirve para otra cosa.</p>
+        </div>
+
+        <div class="g3 bloque">
+          <div class="card reveal">
+            <span class="num">01 · el chat</span>
+            <h3 class="h4 mt-3">ChatGPT, Claude o Gemini</h3>
+            <p>para <em class="not-italic grad-tx font-semibold">preguntar</em>. Te contesta, y el trabajo lo seguís haciendo vos.</p>
+            <span class="chip mt-4">se queda con vos</span>
+          </div>
+          <div class="card cy reveal">
+            <span class="num">02 · claude code y codex</span>
+            <h3 class="h4 mt-3">Claude Code y Codex</h3>
+            <p>para <em class="not-italic grad-tx font-semibold">construir</em>. Le pedís algo y lo arma: aplicaciones, automatizaciones, sistemas enteros.</p>
+            <span class="chip cy mt-4">en tu compu</span>
+          </div>
+          <div class="card mag reveal">
+            <span class="num">03 · la api</span>
+            <h3 class="h4 mt-3">Agentes de IA</h3>
+            <p>Automatizaciones que corren solas. En un servidor, las 24 horas. Para que ande <em class="not-italic grad-tx font-semibold">solo</em>, adentro de la empresa.</p>
+            <span class="chip mag mt-4">adentro de la empresa</span>
+          </div>
+        </div>
+
+        <div class="card soft reveal mt-[26px] text-center">
+          <p class="text-tx font-semibold">ChatGPT para preguntar. Claude Code para construir. La API para que ande solo.</p>
+        </div>
+
+        <!-- el chat -->
+        <div class="bloque">
+          <h3 class="h3 reveal">El chat: para preguntar</h3>
+          <div class="g2 g-centro">
+            <div class="reveal">
+              <p>ChatGPT, Claude o Gemini. Le escribís, te contesta, y lo copiás a donde lo necesitás.</p>
+              <p>Te sirve un montón a vos: para pensar, para escribir, para aprender. Pero en una empresa, la persona sigue en el medio: copia, pega, decide y lo manda.</p>
+              <p><b class="text-tx">El chat te ayuda a vos. No le saca trabajo a la empresa.</b> Por eso no se vende «un ChatGPT».</p>
+            </div>
+            <div class="card reveal">
+              <div class="chat">
+                <span class="bub yo">escribime un mail para un cliente que no me pagó</span>
+                <span class="bub el">Claro, acá tenés un mail cordial y firme para recordarle el pago…</span>
+                <span class="bub pie">y después lo copiás, lo pegás y lo mandás vos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- claude code -->
+        <div class="bloque">
+          <h3 class="h3 reveal">Claude Code y Codex: para construir</h3>
+          <div class="grid gap-3 max-w-[70ch] reveal">
+            <p>No te contestan un texto: escriben el programa. En tu compu, con vos al lado, mirando lo que hacen.</p>
+            <p>Le pedís algo en castellano, como se lo pedirías a una persona, y arma el código, las pantallas, la base de datos y las conexiones. Lo prueba, lo corrige hasta que anda, y queda andando en tu compu o en un servidor.</p>
+          </div>
+
+          <div class="flujo reveal">
+            <div class="paso">
+              <i class="ph ph-user" aria-hidden="true"></i>
+              <span class="n">01 · vos le pedís</span>
+              <b>«Armame un CRM para esta empresa»</b>
+              <span>en castellano</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-code" aria-hidden="true"></i>
+              <span class="n">02</span>
+              <b>Escribe el código</b>
+              <span>las pantallas, la base de datos, las conexiones</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-bug" aria-hidden="true"></i>
+              <span class="n">03</span>
+              <b>Lo prueba y lo corrige</b>
+              <span>hasta que anda</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <i class="ph ph-desktop-tower" aria-hidden="true"></i>
+              <span class="n">04</span>
+              <b>Queda andando</b>
+              <span>en tu compu, o en un servidor</span>
+            </div>
+          </div>
+
+          <p class="frase reveal">El CRM que armamos en una de mis mentorías salió en una hora. Contra una propuesta de dos años y medio.</p>
+
+          <div class="g2 bloque">
+            <div class="card reveal">
+              <span class="num">cuál elijo</span>
+              <h3 class="h4 mt-3">Uno, y arrancá</h3>
+              <p>Claude Code o Codex: cualquiera de los dos sirve para arrancar. Yo armo todo con Claude Code, y Codex anda a la par, cada uno en lo suyo. Probar todos es la peor estrategia.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">cuánto sale</span>
+              <h3 class="h4 mt-3">Arranca con el plan de 20 dólares al mes</h3>
+              <p>Es el costo de la herramienta, nada más. En el curso completo de Claude Code te explico qué plan conviene y cuándo.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- api -->
+        <div class="bloque">
+          <h3 class="h3 reveal">La API: para que ande solo</h3>
+          <div class="grid gap-3 max-w-[70ch] reveal">
+            <p>La API es la puerta de servicio de un programa: tu sistema le manda algo a la IA y recibe la respuesta, sin que nadie escriba nada.</p>
+            <p>Así funciona un agente de WhatsApp:</p>
+          </div>
+
+          <div class="flujo reveal">
+            <div class="paso">
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+              <span class="n">01</span>
+              <b>Entra un mensaje</b>
+              <span>al WhatsApp de la empresa</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-hard-drives" aria-hidden="true"></i>
+              <span class="n">02</span>
+              <b>Tu sistema lo recibe</b>
+              <span>en un servidor, andando las 24 horas</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-brain" aria-hidden="true"></i>
+              <span class="n">03</span>
+              <b>Le pregunta a la IA</b>
+              <span>por la API, con todo lo que sabe del negocio</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <i class="ph ph-chats-circle" aria-hidden="true"></i>
+              <span class="n">04</span>
+              <b>Le contesta al cliente</b>
+              <span>y queda en la bandeja del negocio, para que lo vea una persona</span>
+            </div>
+          </div>
+
+          <div class="g2 bloque">
+            <div class="card reveal">
+              <span class="num">el servidor</span>
+              <h3 class="h4 mt-3">Una computadora que no es tuya y no se apaga nunca</h3>
+              <p>Ahí viven los agentes y las aplicaciones de tus clientes.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">cuánto sale</span>
+              <h3 class="h4 mt-3">Se paga por uso</h3>
+              <p>Cada pedido a la IA cuesta centavos. Y así contesta a las tres de la mañana, sin que nadie esté.</p>
+            </div>
+          </div>
+
+          <p class="frase cy reveal">El cliente no ve la IA. Ve que le contestaron.</p>
+        </div>
+
+        <!-- problema a solucion -->
+        <div class="bloque">
+          <h3 class="h3 reveal">Y así un problema termina en una solución</h3>
+          <div class="flujo cinco reveal">
+            <div class="paso">
+              <span class="n">01 · el problema</span>
+              <b>«No llegamos a contestar los mensajes»</b>
+              <span>te cuenta el dueño</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <span class="n">02 · claude code</span>
+              <b>Lo construye</b>
+              <span>el agente, la bandeja, las conexiones</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <span class="n">03 · el servidor</span>
+              <b>Donde vive</b>
+              <span>andando las 24 horas</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <span class="n">04 · la api</span>
+              <b>La IA, adentro</b>
+              <span>contesta sola, con lo que sabe del negocio</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <span class="n">05 · la solución</span>
+              <b>Ya no pierde mensajes</b>
+              <span>la empresa lo tiene andando</span>
+            </div>
+          </div>
+
+          <p class="frase reveal">Vos no vendés ChatGPT. <b class="text-tx">Vendés el sistema andando:</b> lo armás con Claude Code, vive en un servidor y usa la IA por la API.</p>
+        </div>
+
+        <!-- clientes -->
+        <div class="bloque">
+          <h3 class="h3 reveal">Algunos de mis clientes, para que lo veas</h3>
+          <div class="g4">
+            <div class="card reveal">
+              <span class="num">una marca que vende por WhatsApp</span>
+              <h3 class="h4 mt-3">Su agente de ventas</h3>
+              <p>Atiende, hace el seguimiento y vende. Lo armó su equipo, conmigo al lado.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">una empresa que vive de licitaciones</span>
+              <h3 class="h4 mt-3">Una aplicación a medida</h3>
+              <p>Junta todas las licitaciones, lee los pliegos y arma la lista de lo que piden. La construye su gerente con Claude Code, conmigo en la llamada.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">purificadores de agua</span>
+              <h3 class="h4 mt-3">Su canal digital</h3>
+              <p>Mercado Libre, las reseñas de Google y los comentarios de Instagram y Facebook, automatizados. Y hay tareas que su equipo ya deja andando solo.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">otro cliente</span>
+              <h3 class="h4 mt-3">Seguimientos para cobrar</h3>
+              <p>Que el que tiene que pagar, pague, sin que nadie lo persiga. Además de su agente, y una aplicación.</p>
+            </div>
+          </div>
+          <p class="frase reveal">Ninguno compró «un ChatGPT». Todos compraron algo andando.</p>
+        </div>
+
+        <!-- programar -->
+        <div class="bloque">
+          <h3 class="h3 reveal">¿Hace falta saber programar? No.</h3>
+          <div class="g2 g-centro">
+            <div class="card kpi reveal">
+              <b>menos de 5</b>
+              <span>de mis más de 50 proyectos los hice con código escrito a mano</span>
+            </div>
+            <div class="grid gap-3 reveal">
+              <p>Bases técnicas, sí: de todo esto tenés que tener bases. No es con la mente. Pero lo técnico hoy lo arma Claude Code, con vos al lado.</p>
+              <p>¿Y si Claude hace el 95%, es una estafa? No: <b class="text-tx">vos sabés qué preguntarle</b>, y eso es lo que te pagan.</p>
+              <p>Lo técnico se aprende. Lo que cuesta es que te llegue gente, y cerrar.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- orden -->
+        <div class="bloque">
+          <h3 class="h3 reveal">Y por eso, el orden</h3>
+          <p class="lead !mt-0 reveal">Al principio es 90% marketing y 10% técnico. Cuando ya tenés clientes, se da vuelta: mitad técnico, mitad hablar con ellos.</p>
+          <div class="barras reveal">
+            <div class="br-f">
+              <span class="br-eti">al principio</span>
+              <div class="bar"><i class="mk" style="flex:9">90% marketing</i><i class="tc" style="flex:1">10%</i></div>
+            </div>
+            <div class="br-f">
+              <span class="br-eti">con clientes</span>
+              <div class="bar"><i class="mk" style="flex:5">50% hablar con ellos</i><i class="tc" style="flex:5">50% técnico</i></div>
+            </div>
+          </div>
+          <div class="br-ley reveal">
+            <span><i class="mk"></i> que te hablen, cerrar y contarle al dueño cómo va</span>
+            <span><i class="tc"></i> armar lo que vendiste</span>
+          </div>
+          <p class="frase reveal">No te encierres a programar. La mitad del trabajo es hablar.</p>
+        </div>
+
+        <!-- resumen -->
+        <div class="resumen reveal">
+          <div class="card soft">
+            <div class="flex items-center justify-between gap-4">
+              <span class="num">entonces, qué es</span>
+              <span class="chip cy">resumen</span>
+            </div>
+            <ul>
+              <li><i aria-hidden="true"></i><div><b>La IA adentro de una empresa</b><span>No otra pestaña de chat.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>El chat, Claude Code y la API</b><span>Uno para preguntar, otro para construir, y el otro para que ande solo.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Sin saber programar</b><span>Con bases técnicas y Claude Code.</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 02 que vender ===================== -->
+      <section class="sec" id="que-vender">
+        <div class="reveal">
+          <div class="rotulo"><b>02</b> qué vender</div>
+          <h2 class="h2">En tres años cambió lo que se <span class="clave">vende</span>.</h2>
+          <p class="lead">Y casi todos siguen vendiendo lo de 2024. De las cinco partes, es la que más cambió.</p>
+        </div>
+
+        <div class="g3 bloque">
+          <div class="card reveal">
+            <span class="num" style="color:var(--mu)">2024</span>
+            <h3 class="h4 mt-3">Agentes de IA</h3>
+            <p>Lo que vendía todo el mundo. Y lo que se sigue vendiendo.</p>
+          </div>
+          <div class="card cy reveal">
+            <span class="num">2025</span>
+            <h3 class="h4 mt-3">Infraestructuras de IA</h3>
+            <p>Lo que empecé a mostrar yo.</p>
+          </div>
+          <div class="card mag reveal">
+            <span class="num">2026</span>
+            <h3 class="h4 mt-3">Sistemas de IA con Claude Code y Codex</h3>
+            <p>Lo que armo hoy.</p>
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Hoy casi todo el mundo vende lo mismo</h3>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">agencia 1</span>
+              <h3 class="h4 mt-3">Agente de IA para tu WhatsApp</h3>
+              <p>Contesta las 24 horas y no se olvida de nadie.</p>
+              <span class="chip mt-4">implementación + abono</span>
+            </div>
+            <div class="card reveal">
+              <span class="num">agencia 2</span>
+              <h3 class="h4 mt-3">Tu asistente con IA</h3>
+              <p>Atiende a tus clientes mientras dormís.</p>
+              <span class="chip mt-4">implementación + abono</span>
+            </div>
+            <div class="card reveal">
+              <span class="num">agencia 3</span>
+              <h3 class="h4 mt-3">Chatbot para tu negocio</h3>
+              <p>Respuestas automáticas en WhatsApp e Instagram.</p>
+              <span class="chip mt-4">implementación + abono</span>
+            </div>
+          </div>
+          <div class="nota bad reveal">
+            <span class="chip bad">lo mismo</span>
+            <p class="mt-3">Tres agencias distintas, la misma oferta. Y el dueño ya las recibió a las tres. Y al que vende solo el agente, se le cae la pirámide con cada cambio de Meta. Desde el 1 de octubre de 2026, cada mensaje que manda un agente se cobra, pasados los mil gratis del mes. Capaz que cuando leas esto, ya cambió otra cosa.</p>
+          </div>
+
+          <a class="card cy reveal mt-[14px] block" href="https://fcori47.github.io/calculadora-whatsapp/" target="_blank" rel="noopener">
+            <div class="flex items-center justify-between gap-4 flex-wrap">
+              <span class="chip cy">gratis</span>
+              <i class="ph ph-calculator text-[24px]" style="color:var(--cy)" aria-hidden="true"></i>
+            </div>
+            <h3 class="h4 mt-4">La calculadora: cuánto le sale a tu cliente su agente de WhatsApp</h3>
+            <p>Con las tarifas oficiales de Meta por país, los mil mensajes gratis y lo que llega por anuncios.</p>
+          </a>
+
+          <p class="frase mag reveal">Y ojo: el agente sirve. Todos mis clientes lo usan. <b class="text-tx">El problema es vender solo eso.</b></p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">No le vendas un agente: cambiale la empresa</h3>
+          <p class="lead !mt-0 reveal">Esta es la tabla de lo que se vende hoy, de mejor a peor. La misma que les doy a mis alumnos.</p>
+
+          <div class="tier reveal">
+            <div class="tier-f t-s">
+              <div class="tier-l" aria-label="nivel S">S</div>
+              <div class="tier-c">
+                <div class="tc"><b>Agentes de IA</b><span>Si la empresa no tiene un problema de mensajes, no le vendas un agente.</span></div>
+                <div class="tc"><b>Formar al equipo</b><span>Que su equipo aprenda a construir con IA: queda andando sin depender de vos.</span></div>
+                <div class="tc"><b>Automatizaciones</b><span>La tarea que hoy se hace a mano y se repite, hecha sola.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-a">
+              <div class="tier-l" aria-label="nivel A">A</div>
+              <div class="tier-c">
+                <div class="tc"><b>Sistema operativo de IA</b><span>Todo el negocio conectado: el dueño ve lo que pasa sin pedirle un reporte a nadie.</span></div>
+                <div class="tc"><b>Aplicaciones a medida</b><span>Construirla no es lo difícil. Venderla, sí.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-b">
+              <div class="tier-l" aria-label="nivel B">B</div>
+              <div class="tier-c">
+                <div class="tc"><b>Tableros para el dueño</b><span>El que ve números no pregunta qué pasó. Y suele ser el próximo proyecto.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-c">
+              <div class="tier-l" aria-label="nivel C">C</div>
+              <div class="tier-c">
+                <div class="tc"><b>CRM a medida</b><span>Con Claude Code sale en una hora.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-d">
+              <div class="tier-l" aria-label="nivel D">D</div>
+              <div class="tier-c">
+                <div class="tc"><b>Agentes de voz</b><span>Se integran a la aplicación del cliente. Hoy, al final de la tabla.</span></div>
+                <div class="tc"><b>Base de conocimiento (RAG)</b><span>Treinta hojas no necesitan un RAG: dale lo que pide, y simple.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="frase reveal">Fijate arriba de todo: <b class="text-tx">el agente está, pero no está solo.</b> Al lado están enseñarle a su equipo y automatizar lo que hacen a mano.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y cada cliente necesita otra cosa</h3>
+          <p class="lead !mt-0 reveal">No hay un paquete que le sirva a todos. Hay un montón de cosas entre medio.</p>
+          <div class="rango reveal">
+            <div class="rg-p"><b>Solo un agente de IA</b><span>Hay a quien le alcanza con eso.</span></div>
+            <div class="rg-p"><b>Un agente, y algo más</b><span>Seguimientos para cobrar, una aplicación, Mercado Libre…</span></div>
+            <div class="rg-p ok"><b>Áreas enteras</b><span>Una fábrica: cuatro áreas automatizadas.</span></div>
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Si vendés un agente, que aguante</h3>
+          <p class="lead !mt-0 reveal">Instalarlo es fácil. Lo difícil es que aguante en producción, con clientes de verdad escribiendo.</p>
+          <div class="g4">
+            <div class="card reveal">
+              <span class="num">el triaje</span>
+              <h3 class="h4 mt-3">Un agente por tema</h3>
+              <p>No uno con todas las herramientas: uno entiende qué quiere cada mensaje y lo pasa al que sabe.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">el primer mensaje</span>
+              <h3 class="h4 mt-3">Que ya califique</h3>
+              <p>El que atiende el primer mensaje filtra: a quién le sirve y a quién no.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">el cierre</span>
+              <h3 class="h4 mt-3">Abre el agente, cierra el humano</h3>
+              <p>El agente arranca la charla. El que vende, al final, es una persona.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">con qué</span>
+              <h3 class="h4 mt-3">VPS, Claude, Chatwoot y AgentKit</h3>
+              <p>Los agentes de hoy, en un servidor propio y por la API oficial.</p>
+            </div>
+          </div>
+          <p class="frase reveal">Instalarlo es un video. Que aguante es el oficio.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">El sistema operativo de IA se vende como claridad</h3>
+          <p class="lead !mt-0 reveal">Un sistema con todo el contexto del negocio, conectado a todo. El dueño ve lo que pasa sin pedirle un reporte a nadie.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">cómo se vende</span>
+              <h3 class="h4 mt-3">Saber de dónde viene cada venta</h3>
+              <p>Eso es lo que compra el dueño: claridad, no un programa.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">con qué se muestra</span>
+              <h3 class="h4 mt-3">Una demo que ya tiene sus conexiones</h3>
+              <p>No una promesa: el sistema andando, conectado a lo que usa.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">cómo se instala</span>
+              <h3 class="h4 mt-3">El dueño y el equipo</h3>
+              <p>Cada empleado lo usa con la información de su puesto.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Aplicaciones a medida: construirla no es lo difícil. Venderla, sí.</h3>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">tres formas</span>
+              <h3 class="h4 mt-3">Desarrollo, alquiler o consultoría</h3>
+              <p>Se la hacés, se la alquilás como servicio, o le enseñás a su equipo a hacerla.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">una por rubro</span>
+              <h3 class="h4 mt-3">Una aplicación base, con módulos</h3>
+              <p>La misma base para cada cliente del rubro: se sacan o se agregan módulos.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">dos caminos</span>
+              <h3 class="h4 mt-3">Un VPS con Coolify, o Vercel + Supabase + Clerk</h3>
+              <p>El primero, para las de tus clientes. El segundo, para una tuya que tiene que escalar.</p>
+            </div>
+          </div>
+          <div class="nota bad reveal">
+            Los dos riesgos de una aplicación hecha con IA: <b>código que no se puede mantener, y el servidor abierto.</b> Antes de pasarle el link, la revisión de seguridad.
+          </div>
+          <p class="frase reveal">Primero detectás qué quiere. Después, le das eso.</p>
+          <p class="lead reveal">Por eso ninguno de mis clientes compró lo mismo. Lo que le vendés no lo decidís vos antes: sale de las primeras llamadas.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">La prueba: una fábrica</h3>
+          <p class="lead !mt-0 reveal">Llegó por un agente de IA. En seis meses, esto es lo que se hizo:</p>
+          <div class="g4">
+            <div class="card reveal">
+              <span class="num">01 · ventas</span>
+              <h3 class="h4 mt-3">El agente y su aplicación de ventas</h3>
+              <p>Atiende todo lo que entra, también lo de los anuncios.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">02 · logística</span>
+              <h3 class="h4 mt-3">Su aplicación de logística</h3>
+              <p>A la medida de cómo trabajan ellos.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">03 · costeo</span>
+              <h3 class="h4 mt-3">El costeo directo</h3>
+              <p>Cuánto les cuesta producir.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">04 · producción</span>
+              <h3 class="h4 mt-3">El tablero de producción</h3>
+              <p>Cómo va la fábrica, en una pantalla.</p>
+            </div>
+          </div>
+          <p class="frase reveal">Eso es cambiarle la empresa. No venderle un agente.</p>
+        </div>
+
+        <div class="resumen reveal">
+          <div class="card soft">
+            <div class="flex items-center justify-between gap-4">
+              <span class="num">entonces, qué vender</span>
+              <span class="chip cy">resumen</span>
+            </div>
+            <ul>
+              <li><i aria-hidden="true"></i><div><b>No un agente solo</b><span>Cambiale la empresa: automatizaciones, aplicaciones, sistemas.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Lo que ese cliente necesita</b><span>A veces es un agente. A veces, cuatro áreas.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Primero lo detectás</b><span>En las primeras llamadas. No lo decidís vos antes.</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 03 como te llegan ===================== -->
+      <section class="sec" id="te-llegan">
+        <div class="reveal">
+          <div class="rotulo"><b>03</b> cómo te llegan · la más importante</div>
+          <h2 class="h2">Podés saber armar todo esto y que no te hable <span class="clave">nadie</span>.</h2>
+          <p class="lead">Lo que armás no vale nada si no te llega gente. Y si cuando llega, no cerrás. Lo técnico es la parte fácil. Lo difícil es esto.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">De dónde salen los clientes, de mejor a peor</h3>
+          <p class="lead !mt-0 reveal">No hay secreto: contenido, anuncios, en persona o tus contactos. Esta es la tabla de mis alumnos.</p>
+          <div class="tier reveal">
+            <div class="tier-f t-s">
+              <div class="tier-l" aria-label="nivel S">S</div>
+              <div class="tier-c">
+                <div class="tc"><b>YouTube</b><span>El que se mira un video entero llega preparado. Todo lo demás conviene que termine acá.</span></div>
+                <div class="tc"><b>Tus contactos</b><span>La gente que ya te conoce y tiene una empresa: la vía con más confianza.</span></div>
+                <div class="tc"><b>Referidos</b><span>No se sale a buscar: si hacés bien el trabajo con los primeros, te recomiendan.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-a">
+              <div class="tier-l" aria-label="nivel A">A</div>
+              <div class="tier-c">
+                <div class="tc"><b>Anuncios con un video de venta</b><span>Para el que tiene más plata que tiempo: anuncio, video, conversación.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-b">
+              <div class="tier-l" aria-label="nivel B">B</div>
+              <div class="tier-c">
+                <div class="tc"><b>Instagram</b><span>Construye marca y empuja al video largo, pero casi no trae clientes solo.</span></div>
+                <div class="tc"><b>Mail</b><span>Para seguir en contacto con el que ya llegó. Y en cada mail, un video.</span></div>
+                <div class="tc"><b>Prospección en frío</b><span>A algunos les fue muy bien y a otros nada. Arrancás sin confianza.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-c">
+              <div class="tier-l" aria-label="nivel C">C</div>
+              <div class="tier-c">
+                <div class="tc"><b>LinkedIn</b><span>De los canales que menos rinden: ese tiempo vale más en YouTube.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="nota cy reveal">
+            Los referidos están arriba porque llegan con confianza. <b>Pero no los esperes:</b> pasan menos de lo que se cree. Lo que sí depende de vos es hacer bien el trabajo con los primeros.
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Todo termina en una conversación</h3>
+          <p class="lead !mt-0 reveal">Anuncios, contenido, en persona o tus contactos: da igual por dónde entra. Lo que importa es que te escriba.</p>
+          <div class="flujo reveal">
+            <div class="paso">
+              <i class="ph ph-play-circle" aria-hidden="true"></i>
+              <span class="n">01</span><b>Más horas vistas</b><span>de tus videos</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-chat-teardrop-text" aria-hidden="true"></i>
+              <span class="n">02</span><b>Más gente que te escribe</b><span>por WhatsApp</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-timer" aria-hidden="true"></i>
+              <span class="n">03</span><b>Contestá en minutos</b><span>no en horas</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <i class="ph ph-phone-call" aria-hidden="true"></i>
+              <span class="n">04</span><b>La llamada</b><span>con el que decide</span>
+            </div>
+          </div>
+          <p class="frase reveal">¿Y si me escriben demasiados? Es el problema que querés tener.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">YouTube, arriba de todo. Y mirá las visitas reales</h3>
+          <div class="g2 g-centro">
+            <div class="reveal">
+              <p>El que se mira un video entero llega preparado: ya te escuchó explicar, ya sabe cómo trabajás. Todo lo demás que hagas conviene que termine ahí.</p>
+              <p>Ojo con el número: desde fines de agosto de 2026, YouTube cuenta una visita apenas arranca el video, aunque la persona se vaya al segundo.</p>
+              <p>Lo que tenés que subir son las <b class="text-tx">visualizaciones con interacción</b>: la gente que se queda. Esas son las visitas reales.</p>
+            </div>
+            <div class="card visitas reveal">
+              <div class="vis-f">
+                <span>Lo que cuenta YouTube arriba</span>
+                <div class="medidor"><i style="width:100%"></i></div>
+              </div>
+              <div class="vis-f on">
+                <span>Visualizaciones con interacción: la gente que se queda</span>
+                <div class="medidor lit"><i style="width:28%"></i></div>
+              </div>
+              <p class="chico">En mi canal, el número de arriba llegó a ser 3,6 veces el de abajo.</p>
+            </div>
+          </div>
+          <p class="frase reveal">El número de arriba te hace sentir bien. El de abajo te trae clientes.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Si arrancás de cero: tus contactos</h3>
+          <p class="lead !mt-0 reveal">La gente que ya te conoce y tiene una empresa. Es la vía con más confianza de entrada.</p>
+          <div class="flujo reveal">
+            <div class="paso">
+              <i class="ph ph-list-checks" aria-hidden="true"></i>
+              <span class="n">01</span><b>Hacé la lista</b><span>la gente que ya conocés y tiene un negocio</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-ear" aria-hidden="true"></i>
+              <span class="n">02</span><b>Andá y escuchá</b><span>no vas a vender: vas a preguntar qué les duele</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <i class="ph ph-user-focus" aria-hidden="true"></i>
+              <span class="n">03</span><b>El problema te lo cuenta el dueño</b><span>y de ahí sale lo que le proponés</span>
+            </div>
+          </div>
+          <p class="frase reveal">No le vendas lo que sabés hacer. Ofrecele lo que busca.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Los anuncios: para el que tiene más plata que tiempo</h3>
+          <p class="lead !mt-0 reveal">El anuncio lleva a un video de venta, el video al embudo, y el embudo termina en una conversación.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">el video de venta</span>
+              <h3 class="h4 mt-3">Un embudo con un video</h3>
+              <p>El anuncio no vende: lleva al video que vende.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">whatsapp</span>
+              <h3 class="h4 mt-3">Dejale el mensaje armado</h3>
+              <p>Si el anuncio termina en WhatsApp, que el mensaje ya esté escrito.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">el precio</span>
+              <h3 class="h4 mt-3">Ojo al subirlo</h3>
+              <p>El que viene de YouTube compra; el de los anuncios, no.</p>
+            </div>
+          </div>
+          <p class="frase reveal">Los anuncios aceleran lo que ya funciona. No arreglan lo que no.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Así me llegan los clientes a mí</h3>
+          <div class="card reveal">
+            <div class="camino">
+              <div class="cam-fila">
+                <div class="cam-n">
+                  <div class="cam-chips">
+                    <span class="chip">Reels</span><span class="chip">Shorts</span><span class="chip">TikTok</span><span class="chip">LinkedIn</span><span class="chip">mails</span>
+                  </div>
+                  <span>todo manda al video</span>
+                </div>
+                <div class="flecha" aria-hidden="true"><i>→</i></div>
+                <div class="cam-n cy"><i class="ph ph-youtube-logo text-[24px]" aria-hidden="true"></i><b>YouTube</b><span>el video largo</span></div>
+                <div class="flecha" aria-hidden="true"><i>→</i></div>
+                <div class="cam-n"><i class="ph ph-whatsapp-logo text-[24px]" aria-hidden="true"></i><b>WhatsApp</b><span>me escriben</span></div>
+                <div class="flecha" aria-hidden="true"><i>→</i></div>
+                <div class="cam-n mag"><i class="ph ph-check-circle text-[24px]" aria-hidden="true"></i><b>La venta</b></div>
+              </div>
+              <div class="cam-fila aparte">
+                <div class="cam-n"><i class="ph ph-megaphone text-[24px]" aria-hidden="true"></i><b>Anuncios</b><span>van por su carril</span></div>
+                <div class="flecha" aria-hidden="true"><i>→</i></div>
+                <div class="cam-n"><i class="ph ph-phone-call text-[24px]" aria-hidden="true"></i><b>Una llamada</b><span>la agendan directo</span></div>
+                <div class="flecha" aria-hidden="true"><i>→</i></div>
+                <div class="cam-n mag"><i class="ph ph-check-circle text-[24px]" aria-hidden="true"></i><b>La venta</b></div>
+              </div>
+            </div>
+          </div>
+          <p class="lead reveal">Todo lo que publico empuja al video, y el video termina en mi WhatsApp. Los anuncios van aparte: directo a una llamada.</p>
+          <p class="frase reveal">Se puede hacer. Pero no es tan fácil como te lo dibujo acá.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y en persona también funciona</h3>
+          <p class="lead !mt-0 reveal">Tres alumnos míos, tres formas distintas.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">un alumno</span>
+              <h3 class="h4 mt-3">Charlas gratis</h3>
+              <p>A empresarios de su ciudad. Y después los sigue todas las semanas.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">otro</span>
+              <h3 class="h4 mt-3">Todo en persona</h3>
+              <p>En su ciudad, con empresas de la construcción.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">otro</span>
+              <h3 class="h4 mt-3">Contactos y referidos</h3>
+              <p>Gente que ya conocía, y la gente que ellos le pasan.</p>
+            </div>
+          </div>
+          <p class="frase reveal">El canal ayuda. No es el único camino.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y lo más importante: que el mismo cliente te siga pagando</h3>
+          <p class="lead !mt-0 reveal">Hacelo bien con el que ya tenés. Que te recomiende puede pasar, pero lo que rinde es seguir trabajando con el mismo.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">uno</span>
+              <h3 class="h4 mt-3">Hacé bien el trabajo</h3>
+              <p>Con los primeros, sobre todo.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">dos</span>
+              <h3 class="h4 mt-3">Que siga mes a mes</h3>
+              <p>Lo que rinde es que el mismo vuelva a contratarte.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">tres</span>
+              <h3 class="h4 mt-3">Y si te recomienda, mejor</h3>
+              <p>Pasa menos de lo que se cree. No lo esperes.</p>
+            </div>
+          </div>
+          <p class="frase reveal">El cliente más barato de conseguir es el que ya tenés.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Siempre te van a venir descremados. No te frustres</h3>
+          <div class="grid gap-3 max-w-[72ch] reveal">
+            <p>En persona y en las redes: gente que quiere el material gratis, o plata fácil, y nada más. No es un error tuyo. Y también te va a venir gente con crema.</p>
+            <p>Por eso se califica antes de la llamada. Prefiero una llamada al mes que quinientas con descremados.</p>
+          </div>
+        </div>
+
+        <div class="resumen reveal">
+          <div class="card soft">
+            <div class="flex items-center justify-between gap-4">
+              <span class="num">entonces, cómo te llegan</span>
+              <span class="chip cy">resumen</span>
+            </div>
+            <ul>
+              <li><i aria-hidden="true"></i><div><b>Contenido que empuja al video</b><span>Y el video termina en tu WhatsApp.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Los anuncios, aparte</b><span>Directo a una llamada.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>En persona y por contactos</b><span>Charlas, referidos, la gente que ya conocés.</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 04 como los cerras ===================== -->
+      <section class="sec" id="cerras">
+        <div class="reveal">
+          <div class="rotulo"><b>04</b> cómo los cerrás</div>
+          <h2 class="h2">Lo que importa son las <span class="clave">conversaciones</span>.</h2>
+          <p class="lead">Que el interesado te escriba él. Y cuando te escribe, contestale en minutos, no en horas.</p>
+        </div>
+
+        <div class="g3 bloque">
+          <div class="card reveal">
+            <span class="num">contestá rápido</span>
+            <h3 class="h4 mt-3">En minutos, no en horas</h3>
+            <p>Contestar a la hora hace que se te caiga una parte de los que te escribieron.</p>
+          </div>
+          <div class="card reveal">
+            <span class="num">calificá</span>
+            <h3 class="h4 mt-3">«Contame qué venís haciendo»</h3>
+            <p>Con eso sabés si le sirve una llamada o si solo quería el material.</p>
+          </div>
+          <div class="card reveal">
+            <span class="num">¿puede pagar?</span>
+            <h3 class="h4 mt-3">Te das cuenta por el negocio</h3>
+            <p>Sin preguntarle cuánto gana: mirá cuántas consultas tiene que no llega a responder.</p>
+          </div>
+        </div>
+        <p class="frase reveal">Y si califica, recién ahí, la llamada.</p>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Vendé siempre el próximo paso, nunca el servicio de una</h3>
+          <p class="lead !mt-0 reveal">El video vende que te escriban. El mensaje vende la llamada. La llamada vende la propuesta.</p>
+          <div class="flujo cinco reveal">
+            <div class="paso">
+              <i class="ph ph-play-circle" aria-hidden="true"></i>
+              <span class="n">01 · el video</span><b>Que te escriba</b><span>&nbsp;</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-chat-teardrop-text" aria-hidden="true"></i>
+              <span class="n">02 · el primer mensaje</span><b>Que califique</b><span>&nbsp;</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-envelope-simple" aria-hidden="true"></i>
+              <span class="n">03 · el mensaje previo</span><b>Que llegue sabiendo</b><span>de qué se va a hablar</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <i class="ph ph-phone-call" aria-hidden="true"></i>
+              <span class="n">04 · la llamada</span><b>Con el que decide</b><span>&nbsp;</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <i class="ph ph-file-text" aria-hidden="true"></i>
+              <span class="n">05 · la propuesta</span><b>Con el precio</b><span>por escrito</span>
+            </div>
+          </div>
+          <div class="nota cy reveal">
+            ¿Pongo mi WhatsApp en la descripción? <b>Mejor un poco de fricción:</b> te escribe menos gente, pero con intención de contratar.
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Son dos llamadas</h3>
+          <p class="lead !mt-0 reveal">En la primera detectás qué quiere. En la segunda le proponés eso. Y las dos, con el que decide: con otro, hay que volver a explicar todo.</p>
+          <div class="g2">
+            <div class="card reveal">
+              <span class="num">llamada 1 · descubrimiento</span>
+              <h3 class="h4 mt-3">Qué quiere de verdad</h3>
+              <p>Dónde pierde tiempo, dónde pierde ventas, qué hace a mano. Acá se ve si es un agente o son cuatro áreas.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">llamada 2 · la propuesta</span>
+              <h3 class="h4 mt-3">Le das eso</h3>
+              <p>Lo que le vas a hacer, en qué orden, y qué pasa si no se cumple.</p>
+            </div>
+          </div>
+          <div class="nota reveal">
+            Antes de la primera, fijate que tenga volumen: que tenga consultas que no llega a responder. <b>Y en la segunda, decís el precio y te callás.</b>
+          </div>
+          <p class="frase reveal">Y la segunda se gana o se pierde con la oferta.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">La oferta se arma con la ecuación del valor</h3>
+          <p class="lead !mt-0 reveal">La de Hormozi. Lo de arriba lo subís; lo de abajo lo bajás.</p>
+          <div class="ecu reveal">
+            <div class="ecu-fila">
+              <div class="ecu-t sube">
+                <i>↑ subilo</i>
+                <b>El resultado soñado</b>
+                <span>Lo que quiere de verdad. Lo sacaste de la primera llamada.</span>
+              </div>
+              <span class="ecu-x" aria-hidden="true">×</span>
+              <div class="ecu-t sube">
+                <i>↑ subila</i>
+                <b>La probabilidad de lograrlo</b>
+                <span>Tus casos, tu demo, lo que ya hiciste.</span>
+              </div>
+            </div>
+            <div class="ecu-linea" aria-hidden="true"></div>
+            <div class="ecu-fila">
+              <div class="ecu-t baja">
+                <i>↓ bajala</i>
+                <b>La demora</b>
+                <span>Cuánto tarda en verlo andando.</span>
+              </div>
+              <span class="ecu-x" aria-hidden="true">×</span>
+              <div class="ecu-t baja">
+                <i>↓ bajalo</i>
+                <b>El esfuerzo y el sacrificio</b>
+                <span>Lo que tiene que hacer él: llenar un formulario y estar en las llamadas. Nada más.</span>
+              </div>
+            </div>
+          </div>
+          <p class="lead reveal">Y el resultado soñado lo sacás de la primera llamada.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">La misma oferta, escrita de dos formas</h3>
+          <div class="g2">
+            <div class="card reveal">
+              <span class="num">como la escribe un técnico</span>
+              <h3 class="h4 mt-3">Cómo funciona</h3>
+              <p>Agente de IA con base de conocimiento, conectado a la API oficial de WhatsApp, con un panel para ver las conversaciones.</p>
+            </div>
+            <div class="card cy reveal">
+              <span class="num">como la entiende el dueño</span>
+              <h3 class="h4 mt-3">Qué le cambia</h3>
+              <p>Que nadie que te escriba se quede sin respuesta. Que tu equipo deje de contestar lo mismo. Y saber quién está listo para comprar.</p>
+            </div>
+          </div>
+          <p class="frase reveal">No le vendas cómo funciona. Vendele qué le cambia.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">La demo: armala en serio, y no la regales</h3>
+          <p class="lead !mt-0 reveal">Elegí un rubro y armá algo chico que resuelva su dolor. Con IA, una demo que anda sale en horas: contra una propuesta de meses, no hay discusión.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">que sirva en serio</span>
+              <h3 class="h4 mt-3">Armala para su caso</h3>
+              <p>Una demo que le resuelve algo de verdad, y caele con eso.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">whatsapp</span>
+              <h3 class="h4 mt-3">Un chip y Chatwoot</h3>
+              <p>Para mostrar el agente: comprate un chip y mostralo andando en Chatwoot.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">el ejemplo</span>
+              <h3 class="h4 mt-3">Un CRM en una hora</h3>
+              <p>Contra una propuesta de dos años y medio.</p>
+            </div>
+          </div>
+          <p class="frase reveal">La demo no se regala. Se usa para cerrar.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y se vende sin apretar</h3>
+          <div class="g4">
+            <div class="card reveal">
+              <span class="num">uno</span>
+              <h3 class="h4 mt-3">Dos opciones</h3>
+              <p>Seguir igual, o resolverlo ya. Que elija él.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">dos</span>
+              <h3 class="h4 mt-3">No le leas la lista</h3>
+              <p>No le recites lo que incluye: mostrale cómo consigue lo que quiere.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">tres</span>
+              <h3 class="h4 mt-3">El precio, en la propuesta</h3>
+              <p>Contra el valor, por escrito. Nunca suelto en un chat.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">cuatro</span>
+              <h3 class="h4 mt-3">¿Te pide descuento?</h3>
+              <p>No le saques cosas: mostrale el retorno.</p>
+            </div>
+          </div>
+          <p class="frase reveal">No hay método oculto. Hablá como una persona.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y adentro, la garantía. Y lo que no se promete</h3>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">la garantía</span>
+              <h3 class="h4 mt-3">Lo del mapa, se hace</h3>
+              <p>Todo lo que se va a hacer va por escrito. Si al final falta algo, se sigue sin costo.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">mes a mes</span>
+              <h3 class="h4 mt-3">Sin permanencia</h3>
+              <p>Se queda porque le sirve, no porque firmó por seis meses.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">nunca</span>
+              <h3 class="h4 mt-3">«Ilimitado» ni «de por vida»</h3>
+              <p>Tu agenda es lo que se te termina. Lo que queda para siempre es lo construido, en su servidor.</p>
+            </div>
+          </div>
+          <p class="frase reveal">La garantía sube la probabilidad. Lo ilimitado te la baja a vos.</p>
+        </div>
+
+        <div class="resumen reveal">
+          <div class="card soft">
+            <div class="flex items-center justify-between gap-4">
+              <span class="num">entonces, cómo los cerrás</span>
+              <span class="chip cy">resumen</span>
+            </div>
+            <ul>
+              <li><i aria-hidden="true"></i><div><b>Dos llamadas</b><span>En la primera detectás qué quiere. En la segunda, se lo proponés.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>La ecuación del valor</b><span>Subís el resultado y la probabilidad. Bajás la demora y el esfuerzo.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Escrita para el dueño</b><span>Qué le cambia, con la garantía adentro y mes a mes.</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== 05 entrega ===================== -->
+      <section class="sec" id="entrega">
+        <div class="reveal">
+          <div class="rotulo"><b>05</b> la entrega de servicio · y ahora sí, lo técnico</div>
+          <h2 class="h2">¿Con qué se hace? Claude Code y un <span class="clave">servidor</span>.</h2>
+          <p class="lead">Claude Code arma las aplicaciones. Viven en un servidor privado que paga la empresa: una computadora que no es tuya y no se apaga nunca.</p>
+        </div>
+
+        <div class="g3 bloque">
+          <div class="card reveal">
+            <span class="num">claude code</span>
+            <h3 class="h4 mt-3">Arma las aplicaciones</h3>
+            <p>A la medida de cómo trabaja cada área.</p>
+          </div>
+          <div class="card reveal">
+            <span class="num">el servidor</span>
+            <h3 class="h4 mt-3">Privado y cuidado</h3>
+            <p>Con login, las claves escondidas y una revisión de seguridad antes de salir.</p>
+          </div>
+          <div class="card reveal">
+            <span class="num">git</span>
+            <h3 class="h4 mt-3">El código es de ellos</h3>
+            <p>En su GitHub privado.</p>
+          </div>
+        </div>
+        <p class="frase reveal">Dejan de alquilar aplicaciones ajenas: <b class="text-tx">solo pagan el servidor.</b> Y todo lo construido queda en su empresa.</p>
+        <div class="nota reveal">
+          Antes era n8n. Todavía se usa, cada vez menos. Y de todo esto tenés que tener bases: no es con la mente.
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Lo que uso de verdad</h3>
+          <p class="lead !mt-0 reveal">La tabla técnica de mis alumnos, de mejor a peor.</p>
+          <div class="tier reveal">
+            <div class="tier-f t-s">
+              <div class="tier-l" aria-label="nivel S">S</div>
+              <div class="tier-c">
+                <div class="tc"><b>Claude Code</b><span>Con lo que se arma todo. Pedile lo que querés: no hay prompt secreto.</span></div>
+                <div class="tc"><b>Opus con esfuerzo Max</b><span>El mejor modelo, al máximo. Lo que buscás es potencia, no ahorrar tokens.</span></div>
+                <div class="tc"><b>Servidor propio (VPS)</b><span>Ahí viven las aplicaciones y los agentes de tus clientes.</span></div>
+                <div class="tc"><b>Coolify</b><span>Para manejar ese servidor, y desplegar desde Claude Code.</span></div>
+                <div class="tc"><b>API oficial de Meta</b><span>WhatsApp sin techo y sin riesgo de perder el número.</span></div>
+                <div class="tc"><b>Seguridad de las aplicaciones</b><span>Antes de que entren datos reales: acceso cerrado y claves fuera del navegador.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-a">
+              <div class="tier-l" aria-label="nivel A">A</div>
+              <div class="tier-c">
+                <div class="tc"><b>Codex</b><span>A la par de Claude Code, cada uno en lo suyo.</span></div>
+                <div class="tc"><b>JEV y Laya</b><span>Deciden en milisegundos. En un servidor, JEV; en tu compu, Laya.</span></div>
+                <div class="tc"><b>EasyPanel</b><span>Anda. Con Coolify, igual, anduvo mejor.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-b">
+              <div class="tier-l" aria-label="nivel B">B</div>
+              <div class="tier-c">
+                <div class="tc"><b>n8n</b><span>Fue la herramienta de 2025. Hoy queda para las tareas que corren solas cada tanto.</span></div>
+                <div class="tc"><b>Vercel + Supabase + Clerk</b><span>Para una aplicación tuya que tiene que escalar.</span></div>
+                <div class="tc"><b>Ultracode</b><span>Tarda mucho más y no siempre sale mejor.</span></div>
+              </div>
+            </div>
+            <div class="tier-f t-d">
+              <div class="tier-l" aria-label="nivel D">D</div>
+              <div class="tier-c">
+                <div class="tc"><b>Fable, Sonnet y Haiku</b><span>Para lo que armás, siempre el mejor modelo.</span></div>
+                <div class="tc"><b>Grok Code y Gemini</b><span>Quedaron afuera.</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="frase reveal">La herramienta cambia cada tres meses. La tabla se actualiza. El oficio, no.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Mes a mes, no seis meses de una</h3>
+          <p class="lead !mt-0 reveal">El cliente paga el mes por adelantado y puede cortar avisando antes del siguiente. Se queda porque le sirve.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">la agenda</span>
+              <h3 class="h4 mt-3">Seis meses de una te la atan</h3>
+              <p>Y tu agenda es lo que se te termina.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">el ritmo</span>
+              <h3 class="h4 mt-3">Cobrado todo por adelantado, nadie apura</h3>
+              <p>Mes a mes, el cliente avanza y vos también.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">a largo plazo</span>
+              <h3 class="h4 mt-3">El que se queda, te recomienda</h3>
+              <p>Lo que rinde es que el mismo cliente vuelva a contratarte.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Lo que sigue es un ritmo, semana a semana</h3>
+          <div class="flujo cinco reveal">
+            <div class="paso">
+              <span class="n">paso cero</span><b>El mapa</b><span>todo lo que se va a hacer, por escrito: contra eso se mide</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <span class="n">cada semana</span><b>Una llamada grabada</b><span>con su equipo</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <span class="n">después de cada llamada</span><b>Un informe</b><span>lo que se consiguió esa semana</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso">
+              <span class="n">entre llamadas</span><b>Vos, encima del equipo</b><span>para que no se frene nada</span>
+            </div>
+            <div class="flecha" aria-hidden="true"><i>→</i></div>
+            <div class="paso ok">
+              <span class="n">al final</span><b>Mostrale lo que sigue</b><span>el próximo proyecto sale de ahí</span>
+            </div>
+          </div>
+          <div class="nota reveal">
+            Y antes de la primera llamada, la bienvenida: qué se puede, qué no, qué necesitás de él y cuánto lleva. <b>El cliente no adivina.</b> Y avisale que las primeras semanas el agente se va ajustando.
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Las reglas de cada semana</h3>
+          <div class="g4">
+            <div class="card reveal">
+              <span class="num">uno</span>
+              <h3 class="h4 mt-3">Una o dos reuniones por semana</h3>
+              <p>Con menos, no funciona.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">dos</span>
+              <h3 class="h4 mt-3">Una funcionalidad por día</h3>
+              <p>Así se construye con el cliente: algo visible todo el tiempo.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">tres</span>
+              <h3 class="h4 mt-3">Todo por escrito</h3>
+              <p>Lo que se habló con el dueño queda anotado.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">cuatro</span>
+              <h3 class="h4 mt-3">Si el cliente no escribe, escribile vos</h3>
+              <p>El silencio no es que está todo bien.</p>
+            </div>
+          </div>
+          <p class="frase reveal">Al que ya compró se lo aprieta: si no ve nada hecho, se pregunta qué pasó.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">El informe de cada semana: arriba, lo que cambió</h3>
+          <div class="g2 g-centro">
+            <div class="card ok reveal">
+              <div class="flex items-center justify-between gap-4">
+                <span class="num">informe de la semana</span>
+                <span class="chip ok">lo que se consiguió</span>
+              </div>
+              <ul class="resumen !mt-0" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:14px">
+                <li style="padding:12px 14px"><i aria-hidden="true"></i><div><b>Mercado Libre quedó automatizado.</b></div></li>
+                <li style="padding:12px 14px"><i aria-hidden="true"></i><div><b>Arrancamos con las otras tiendas en línea.</b></div></li>
+              </ul>
+            </div>
+            <div class="reveal">
+              <p><b class="text-tx">lo técnico va abajo · primero, lo que cambió.</b> No lo técnico. Lo que el dueño puede ver funcionando.</p>
+              <p>Prometido contra cumplido: ¿vas adelantado o atrasado? Si no llegás, decilo antes. <b class="text-tx">Mejor decir mes y medio y cumplir, que un mes y fallar.</b></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y mejor que un informe: el portal del cliente</h3>
+          <p class="lead !mt-0 reveal">El dueño entra cuando quiere y ve cómo va su proyecto: qué se hizo, qué falta y el semáforo del acuerdo.</p>
+          <div class="g3">
+            <div class="card reveal">
+              <span class="num">uno</span>
+              <h3 class="h4 mt-3">Lo ve solo el dueño</h3>
+              <p>Con su cuenta.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">dos</span>
+              <h3 class="h4 mt-3">Sin IA adentro</h3>
+              <p>Muestra, no propone.</p>
+            </div>
+            <div class="card reveal">
+              <span class="num">tres</span>
+              <h3 class="h4 mt-3">Seguro antes de pasarle el link</h3>
+              <p>Acceso cerrado y las claves fuera del navegador.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Auditá antes de construir</h3>
+          <div class="grid gap-3 max-w-[72ch] reveal">
+            <p>Mirá el proceso real del cliente, cómo vende y dónde se pierde, antes de armar nada.</p>
+            <p>Me la mandé una vez con un cliente, por decir que sí sin mirar. Desde ahí, primero analizo y después digo que sí.</p>
+          </div>
+          <p class="frase mag reveal">Decir que no también es parte del trabajo.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Y lo que te quema</h3>
+          <div class="g3">
+            <div class="card bad reveal">
+              <span class="num">uno</span>
+              <h3 class="h4 mt-3">Tres desarrollos a la vez</h3>
+              <p>Te quema. Subí el precio o delegá.</p>
+            </div>
+            <div class="card bad reveal">
+              <span class="num">dos</span>
+              <h3 class="h4 mt-3">Más clientes de los que podés atender</h3>
+              <p>En algún momento elegís a cuál le das resultado, y ahí empiezan los roces.</p>
+            </div>
+            <div class="card bad reveal">
+              <span class="num">tres</span>
+              <h3 class="h4 mt-3">El ego</h3>
+              <p>Al cliente no le importan tu auto ni tus seguidores. Tampoco se trata de agachar la cabeza.</p>
+            </div>
+          </div>
+          <p class="frase reveal">Pocos clientes y mucho resultado rinde más que muchos a medias.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">La entrega de servicio no te trae clientes nuevos. Hace que te sigan contratando</h3>
+          <ul class="crece reveal">
+            <li><span>al principio</span><b>Un agente de IA</b></li>
+            <li><span>después</span><b>Los anuncios, conectados</b></li>
+            <li><span>después</span><b>Cuatro o cinco aplicaciones</b></li>
+            <li class="ok"><span>y seguimos</span><b>Cuatro áreas, y lo que venga</b></li>
+          </ul>
+          <p class="lead reveal">¿Te acordás de la fábrica? Seis meses. Nada de eso se vendió en una llamada: se fue sumando, mes a mes.</p>
+          <p class="frase reveal">Vino por un agente. Se quedó por la entrega de servicio.</p>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Si ya no das abasto, no busques más clientes</h3>
+          <div class="g2 g-centro">
+            <div class="reveal">
+              <p>Con esto, capaz que ya estás. Te falta otra cosa: subir el precio o delegar.</p>
+              <p>El problema de tener demasiados es el que querés tener. Pero se resuelve distinto.</p>
+            </div>
+            <a class="card cy reveal block" href="#ruta">
+              <span class="chip cy">hoja de ruta</span>
+              <h3 class="h4 mt-3">Ver la hoja de ruta «No doy abasto»</h3>
+              <p>Elegila arriba y te arma el orden: qué hacer primero y qué después.</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="resumen reveal">
+          <div class="card soft">
+            <div class="flex items-center justify-between gap-4">
+              <span class="num">entonces, la entrega de servicio</span>
+              <span class="chip cy">resumen</span>
+            </div>
+            <ul>
+              <li><i aria-hidden="true"></i><div><b>Lo técnico, con bases</b><span>Claude Code y un servidor. No es con la mente.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Una llamada y un informe por semana</b><span>Arriba de todo, lo que se consiguió.</span></div></li>
+              <li><i aria-hidden="true"></i><div><b>Mes a mes</b><span>Se queda porque le sirve. Y te recomienda.</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== todo junto y cinco pasos ===================== -->
+      <section class="sec" id="cinco-pasos">
+        <div class="reveal">
+          <div class="rotulo"><b>todo junto</b> y los cinco pasos</div>
+          <h2 class="h2">Todo junto se ve <span class="clave">así</span>.</h2>
+          <p class="lead">Cinco partes que se suman. Ninguna alcanza sola.</p>
+        </div>
+
+        <div class="suma reveal mt-[26px]">
+          <div class="suma-p"><span>qué es</span><b>la IA adentro de una empresa</b></div>
+          <span class="suma-op" aria-hidden="true">+</span>
+          <div class="suma-p"><span>qué vender</span><b>lo que necesita, con Claude Code</b></div>
+          <span class="suma-op" aria-hidden="true">+</span>
+          <div class="suma-p"><span>cómo te llegan</span><b>contenido, anuncios, en persona</b></div>
+          <span class="suma-op" aria-hidden="true">+</span>
+          <div class="suma-p"><span>cómo los cerrás</span><b>dos llamadas y la ecuación del valor</b></div>
+          <span class="suma-op" aria-hidden="true">+</span>
+          <div class="suma-p"><span>la entrega de servicio</span><b>lo técnico, la llamada, el informe</b></div>
+          <span class="suma-op" aria-hidden="true">=</span>
+          <div class="suma-p fin"><span>tu agencia</span><b>la que te siguen contratando</b></div>
+        </div>
+
+        <div class="bloque">
+          <h3 class="h3 reveal">Los cinco pasos para arrancar esta semana</h3>
+          <div class="flex items-center justify-between gap-4 flex-wrap reveal">
+            <p class="lead !mt-0">No hace falta tener todo listo. Hace falta dar el primer paso. Marcalos a medida que los hacés.</p>
+            <span class="chip cy" id="cinco-cuenta">0 de 5</span>
+          </div>
+          <ul class="etapas reveal" style="margin-top:18px">
+            <li class="etapa" style="padding:16px 18px">
+              <div class="tarea">
+                <button type="button" class="tick" data-tick="paso-1" aria-pressed="false" aria-label="Marcar como hecho: elegí un rubro"></button>
+                <span><b class="text-tx">01 · Elegí un rubro.</b> Uno que conozcas. El dolor de cada rubro es otro.</span>
+              </div>
+            </li>
+            <li class="etapa" style="padding:16px 18px">
+              <div class="tarea">
+                <button type="button" class="tick" data-tick="paso-2" aria-pressed="false" aria-label="Marcar como hecho: armá tu demo"></button>
+                <span><b class="text-tx">02 · Armá tu demo.</b> Una sola cosa, bien resuelta, con Claude Code.</span>
+              </div>
+            </li>
+            <li class="etapa" style="padding:16px 18px">
+              <div class="tarea">
+                <button type="button" class="tick" data-tick="paso-3" aria-pressed="false" aria-label="Marcar como hecho: escribí tu oferta"></button>
+                <span><b class="text-tx">03 · Escribí tu oferta.</b> Como la entiende el dueño, con la ecuación del valor.</span>
+              </div>
+            </li>
+            <li class="etapa" style="padding:16px 18px">
+              <div class="tarea">
+                <button type="button" class="tick" data-tick="paso-4" aria-pressed="false" aria-label="Marcar como hecho: conseguí tu primera charla"></button>
+                <span><b class="text-tx">04 · Conseguí tu primera charla.</b> Tus contactos primero: preguntales qué les duele. Después, contenido.</span>
+              </div>
+            </li>
+            <li class="etapa" style="padding:16px 18px">
+              <div class="tarea">
+                <button type="button" class="tick" data-tick="paso-5" aria-pressed="false" aria-label="Marcar como hecho: en esa llamada, escuchá"></button>
+                <span><b class="text-tx">05 · En esa llamada, escuchá.</b> Detectá qué quiere. En la segunda, dáselo.</span>
+              </div>
+            </li>
+          </ul>
+          <p class="frase reveal">Tu agencia de IA no arranca sabiendo todo. Arranca paso a paso.</p>
+        </div>
+      </section>
+
+      <!-- ===================== glosario ===================== -->
+      <section class="sec" id="glosario">
+        <div class="reveal">
+          <div class="rotulo"><b>glosario</b> las palabras de esta guía</div>
+          <h2 class="h2">Lo que significa <span class="clave">cada cosa</span>.</h2>
+          <p class="lead">Sin vueltas, como te lo explicaría en una llamada.</p>
+        </div>
+
+        <div class="mt-[22px] reveal">
+          <label class="sr-only" for="buscar-glosario" style="position:absolute;left:-9999px">Buscar en el glosario</label>
+          <input class="buscador" id="buscar-glosario" type="search" placeholder="Buscar una palabra: API, VPS, RAG…" autocomplete="off">
+        </div>
+
+        <dl class="glos">
+          <div class="glos-t reveal"><dt>API</dt><dd>La puerta de servicio de un programa: tu sistema le manda algo a la IA y recibe la respuesta, sin que nadie escriba nada. Se paga por uso.</dd></div>
+          <div class="glos-t reveal"><dt>Agente de IA</dt><dd>Un sistema que atiende solo: lee el mensaje, entiende qué quiere y contesta con lo que sabe del negocio.</dd></div>
+          <div class="glos-t reveal"><dt>Claude Code y Codex</dt><dd>La IA que construye: le pedís algo en castellano y escribe el programa, con vos al lado.</dd></div>
+          <div class="glos-t reveal"><dt>Servidor (VPS)</dt><dd>Una computadora que no es tuya y no se apaga nunca. Ahí viven las aplicaciones y los agentes de tus clientes.</dd></div>
+          <div class="glos-t reveal"><dt>Coolify</dt><dd>El panel para manejar ese servidor, y para desplegar lo que armaste con Claude Code: subirlo para que ande.</dd></div>
+          <div class="glos-t reveal"><dt>Chatwoot</dt><dd>La bandeja de entrada del negocio: ahí quedan todas las conversaciones, para que las vea una persona. Es gratis y de código abierto.</dd></div>
+          <div class="glos-t reveal"><dt>AgentKit</dt><dd>El kit del agente, con Chatwoot y Coolify. Es gratis: pagás el servidor y el modelo.</dd></div>
+          <div class="glos-t reveal"><dt>API oficial de Meta</dt><dd>La forma de conectar WhatsApp sin techo y sin riesgo de perder el número. Desde el 1 de octubre de 2026 cobra por mensaje, pasados los mil gratis del mes.</dd></div>
+          <div class="glos-t reveal"><dt>Triaje</dt><dd>Un agente que entiende qué quiere cada mensaje y lo pasa al que sabe. Mejor que uno solo con todas las herramientas.</dd></div>
+          <div class="glos-t reveal"><dt>RAG o base de conocimiento</dt><dd>Que la IA busque en tus documentos antes de contestar. Treinta hojas no necesitan un RAG.</dd></div>
+          <div class="glos-t reveal"><dt>Sistema operativo de IA</dt><dd>Todo el negocio conectado, con su contexto: el dueño ve lo que pasa sin pedirle un reporte a nadie.</dd></div>
+          <div class="glos-t reveal"><dt>Git y GitHub</dt><dd>Donde vive el código. El de tus clientes va en su GitHub privado: es de ellos.</dd></div>
+          <div class="glos-t reveal"><dt>Demo</dt><dd>Algo chico que anda y le resuelve un dolor al rubro. Se usa para cerrar; no se regala.</dd></div>
+          <div class="glos-t reveal"><dt>Ecuación del valor</dt><dd>La de Hormozi: el resultado soñado por la probabilidad de lograrlo, dividido la demora por el esfuerzo.</dd></div>
+          <div class="glos-t reveal"><dt>Visitas reales</dt><dd>Las visualizaciones con interacción: la gente que se queda, no la que se va al segundo.</dd></div>
+          <div class="glos-t reveal"><dt>Descremado</dt><dd>El que quiere el material gratis o la plata fácil, y nada más. Siempre van a venir: no te frustres.</dd></div>
+          <div class="glos-t reveal"><dt>Mes a mes</dt><dd>El cliente paga el mes por adelantado y puede cortar avisando antes del siguiente. Se queda porque le sirve.</dd></div>
+          <div class="glos-t reveal"><dt>Mapa</dt><dd>Todo lo que se va a hacer, por escrito, antes de arrancar. Contra eso se mide lo prometido y lo cumplido.</dd></div>
+        </dl>
+        <p class="glos-vacio" id="glos-vacio" hidden>No hay ninguna palabra que coincida. Probá con otra.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ===================== pie ===================== -->
+  <footer class="pie">
+    <div class="grid gap-4 md:grid-cols-2">
+      <div>
+        <p class="font-semibold text-tx">Cómo empezar tu propia agencia de IA, paso a paso.</p>
+        <p class="mt-2">Guía práctica armada a partir de la guía original de Facundo Corengia. Se conserva el contenido, la numeración y el orden de los ítems, sin los listados de video.</p>
+      </div>
+      <div class="md:text-right">
+        <p><a class="navlink" href="https://fcori47.github.io/guia-agencia-ia/" target="_blank" rel="noopener">Guía original</a></p>
+        <p class="mt-2"><a class="navlink" href="https://fcori47.github.io/calculadora-whatsapp/" target="_blank" rel="noopener">Calculadora de WhatsApp</a></p>
+        <p class="mt-4 chico">Tu progreso se guarda solo en este navegador.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</main>
+
+<script>
+/* Las cuatro hojas de ruta de la guía.
+   Estructura por ruta: nombre, desc, etapas[t, para, tareas[], pasas, sigue?] */
+window.RUTAS = {
+  cero: {
+    nombre: 'Arranco de cero',
+    desc: 'No sabés lo técnico y todavía no tenés clientes. Está bien: un montón de mis alumnos arrancaron así. Vas en este orden.',
+    etapas: [
+      {
+        t: 'Entendé qué es, y armá tu primera cosa',
+        para: 'Antes de vender nada, entendé las tres cosas y probalas con tus manos.',
+        tareas: [
+          'Entendé la diferencia: el chat para preguntar, Claude Code y Codex para construir, la API para que ande solo. Está en la parte 01.',
+          'Instalá Claude Code (o Codex) en tu compu.',
+          'Pedile tu primera cosa chica, en castellano, como se la pedirías a una persona.',
+          'Dejá andando una automatización o un agente de prueba.'
+        ],
+        pasas: 'podés explicarle a cualquiera, en dos frases, qué armaste y para qué le sirve a una empresa.'
+      },
+      {
+        t: 'Elegí un rubro y qué le vas a resolver',
+        para: 'No le vendas lo que sabés hacer: ofrecele lo que busca.',
+        tareas: [
+          'Elegí un rubro que conozcas. El dolor de cada rubro es otro.',
+          'Mirá la tabla de lo que se vende hoy. El agente solo no alcanza.',
+          'Armá tu demo con Claude Code: una sola cosa, bien resuelta, para ese rubro.',
+          'Escribí tu oferta como la entiende el dueño: qué le cambia, no cómo funciona.'
+        ],
+        pasas: 'tenés una demo andando y una oferta que cualquier dueño entiende en tres líneas.'
+      },
+      {
+        t: 'Conseguí tus primeras charlas',
+        para: 'Todo termina en una conversación. Arrancá por la gente que ya te conoce.',
+        tareas: [
+          'Hacé la lista: la gente que ya conocés y tiene un negocio.',
+          'Andá y escuchá: preguntales qué les duele. No vas a vender.',
+          'Cuando te escriban, contestá en minutos, no en horas.',
+          'Empezá a subir contenido que termine en un video largo. Rinde a los meses, no a la semana.'
+        ],
+        pasas: 'tenés tu primera llamada agendada con alguien que decide.'
+      },
+      {
+        t: 'Cerrá tu primer cliente',
+        para: 'Dos llamadas y una oferta. Sin apretar.',
+        tareas: [
+          'Antes de la llamada, fijate que tenga volumen: consultas que no llega a responder.',
+          'En la primera llamada, detectá qué quiere: dónde pierde tiempo, dónde pierde ventas, qué hace a mano.',
+          'Armá la propuesta con la ecuación del valor, escrita para el dueño.',
+          'En la segunda llamada, proponele eso. Decís el precio y te callás.',
+          'Mes a mes, con la garantía adentro. Nunca «ilimitado» ni «de por vida».'
+        ],
+        pasas: 'tu primer cliente pagó el primer mes.'
+      },
+      {
+        t: 'Hacé bien la entrega de servicio',
+        para: 'La entrega de servicio no te trae clientes nuevos: hace que te sigan contratando.',
+        tareas: [
+          'Antes de la primera llamada, la bienvenida: qué se puede, qué no, qué necesitás de él y cuánto lleva.',
+          'Escribí el mapa: todo lo que se va a hacer, por escrito.',
+          'Una llamada grabada por semana, y después, un informe: arriba, lo que cambió.',
+          'Una funcionalidad por día. Y si el cliente no escribe, escribile vos.',
+          'Al final del mes, mostrale lo que sigue.'
+        ],
+        pasas: 'tu cliente renovó el segundo mes.',
+        sigue: { ruta: 'clientes', txt: 'Ya tengo mi primer cliente: pasame a esa hoja de ruta' }
+      }
+    ]
+  },
+  tecnico: {
+    nombre: 'Sé lo técnico',
+    desc: 'Sabés armar, pero no te habla nadie. Tu problema no es técnico: es que te llegue gente y cerrar.',
+    etapas: [
+      {
+        t: 'Dejá de aprender y empezá a ofrecer',
+        para: 'Al principio es 90% marketing y 10% técnico. Si ya sabés armar, no te falta otra herramienta.',
+        tareas: [
+          'Dejá de probar herramientas nuevas: una para cada cosa, y listo.',
+          'Pasá de vender agentes sueltos a sistemas: Claude Code y un servidor.',
+          'Mirá la tabla de lo que se vende hoy y elegí qué vas a ofrecer.'
+        ],
+        pasas: 'sabés qué vas a ofrecer, y a qué rubro.'
+      },
+      {
+        t: 'Rubro, demo y oferta',
+        para: 'Tu ventaja es la velocidad: una demo que anda sale en horas.',
+        tareas: [
+          'Elegí un rubro que conozcas.',
+          'Armá una aplicación base para ese rubro, con módulos que se sacan o se agregan según el cliente.',
+          'Que la demo le resuelva algo de verdad al rubro. No la regales: se usa para cerrar.',
+          'Escribí la oferta como la entiende el dueño, no como la escribe un técnico.'
+        ],
+        pasas: 'tenés la demo andando y la oferta escrita para el dueño.'
+      },
+      {
+        t: 'Que te llegue gente',
+        para: 'Podés saber armar todo y que no te hable nadie. Te tienen que encontrar.',
+        tareas: [
+          'Tus contactos primero: preguntales qué les duele.',
+          'YouTube arriba de todo: mostrá lo que construís, en videos largos.',
+          'Que todo lo demás empuje al video, y que el video termine en tu WhatsApp.',
+          'Mirá las visitas reales: las visualizaciones con interacción.'
+        ],
+        pasas: 'tenés conversaciones con dueños todas las semanas.'
+      },
+      {
+        t: 'Cerrá sin apretar',
+        para: 'Dos llamadas, y las dos con el que decide.',
+        tareas: [
+          'Calificá antes de la llamada: «contame qué venís haciendo».',
+          'Primera llamada: qué quiere de verdad. Segunda: le das eso.',
+          'No le leas la lista de lo que incluye: mostrale cómo consigue lo que quiere.',
+          '¿Te pide descuento? No le saques cosas: mostrale el retorno.'
+        ],
+        pasas: 'cerraste tu primer cliente, mes a mes.'
+      },
+      {
+        t: 'Tu entrega de servicio, de profesional',
+        para: 'Acá es donde tu parte técnica rinde de verdad.',
+        tareas: [
+          'Auditá antes de construir: mirá el proceso real del cliente.',
+          'Servidor privado y cuidado: acceso cerrado, claves fuera del navegador y revisión de seguridad antes de salir.',
+          'El código es del cliente, en su GitHub privado.',
+          'Una llamada y un informe por semana: arriba, lo que cambió.'
+        ],
+        pasas: 'tu cliente renovó, y te pidió lo que sigue.',
+        sigue: { ruta: 'clientes', txt: 'Ya tengo clientes: pasame a esa hoja de ruta' }
+      }
+    ]
+  },
+  clientes: {
+    nombre: 'Ya tengo clientes',
+    desc: 'Tenés uno o más. Ahora lo que más rinde es que el mismo cliente te siga contratando.',
+    etapas: [
+      {
+        t: 'Ordená la entrega de servicio',
+        para: 'Lo que sigue es un ritmo, semana a semana.',
+        tareas: [
+          'Pasá a mes a mes, sin permanencia: se queda porque le sirve.',
+          'Cada cliente, con su mapa por escrito: contra eso se mide.',
+          'Una llamada grabada por semana, con su equipo.',
+          'Después de cada llamada, el informe: arriba, lo que cambió.',
+          'Todo por escrito. Y si el cliente no escribe, escribile vos.'
+        ],
+        pasas: 'cada cliente tiene su mapa, su llamada y su informe de la semana.'
+      },
+      {
+        t: 'Que lo que vendiste aguante',
+        para: 'Instalarlo es un video. Que aguante es el oficio.',
+        tareas: [
+          'Si vendiste un agente: uno por tema, que el primer mensaje califique, y que cierre una persona.',
+          'Revisá cuánto le sale con Meta desde el 1 de octubre de 2026: la calculadora de WhatsApp.',
+          'Seguridad antes de que entren datos reales: acceso cerrado y claves fuera del navegador.',
+          'Prometido contra cumplido: si no llegás, decilo antes.'
+        ],
+        pasas: 'lo que vendiste anda solo, y el cliente no te tiene que avisar que se cayó.'
+      },
+      {
+        t: 'El próximo proyecto sale del mismo cliente',
+        para: 'Lo que rinde es que el mismo vuelva a contratarte.',
+        tareas: [
+          'Auditá antes de construir: mirá dónde pierde tiempo y ventas.',
+          'Al final de cada etapa, mostrale lo que sigue.',
+          'Ofrecele lo siguiente de la tabla: un tablero, una aplicación, el sistema operativo de IA.',
+          'Dale un portal: que entre cuando quiera y vea cómo va su proyecto.'
+        ],
+        pasas: 'un cliente que vino por una cosa, hoy te contrata otra.'
+      },
+      {
+        t: 'Que te llegue más gente, sin descuidar a los que tenés',
+        para: 'Pocos clientes y mucho resultado rinde más que muchos a medias.',
+        tareas: [
+          'Contá en videos largos lo que les armaste, con el sistema en pantalla (sin nombres, si no te dejan).',
+          'Calificá antes de la llamada: siempre te van a venir descremados.',
+          'Los referidos pasan si hacés bien el trabajo. No los esperes.'
+        ],
+        pasas: 'te escribe gente todas las semanas, y elegís con quién trabajar.',
+        sigue: { ruta: 'abasto', txt: 'Ya no doy abasto: pasame a esa hoja de ruta' }
+      }
+    ]
+  },
+  abasto: {
+    nombre: 'No doy abasto',
+    desc: 'Tenés más de lo que podés atender. No busques más clientes: te falta otra cosa.',
+    etapas: [
+      {
+        t: 'Pará de sumar clientes',
+        para: 'El problema de tener demasiados es el que querés tener. Pero se resuelve distinto.',
+        tareas: [
+          'Si tenés tres desarrollos a la vez, te quema: subí el precio o delegá.',
+          'Pocos clientes y mucho resultado rinde más que muchos a medias.',
+          'Mes a mes: no ates tu agenda seis meses por adelantado.',
+          'El ego, afuera: al cliente no le importan tu auto ni tus seguidores.'
+        ],
+        pasas: 'le das resultado a cada cliente que tenés, sin tener que elegir a cuál.'
+      },
+      {
+        t: 'Delegá en sistemas lo que se repite',
+        para: 'Lo que hacés igual todas las semanas no tiene por qué pasar por tu cabeza.',
+        tareas: [
+          'Lo que se repite, pasalo a una skill o a una automatización.',
+          'Armá tu propio sistema: conectá lo que usás todos los días.',
+          'Tu contenido, con un equipo de skills que lo prepare.'
+        ],
+        pasas: 'tu semana tiene horas libres para los clientes.'
+      },
+      {
+        t: 'Vendé lo que no depende de tu agenda',
+        para: 'Formar al equipo está arriba de la tabla: queda andando sin depender de vos.',
+        tareas: [
+          'Formá al equipo del cliente: que aprenda a construir con IA.',
+          'Consultoría: en vez de hacérsela, le enseñás a su equipo a hacerla.',
+          'Una aplicación base por rubro: la misma base para cada cliente, con sus módulos.'
+        ],
+        pasas: 'tu agenda deja de ser el techo.'
+      }
+    ]
+  }
+};
+
+</script>
+<script>
+/* Interacciones de la guía: hoja de ruta con progreso guardado, índice con
+   seguimiento de scroll, filtro del glosario y animaciones de entrada. */
+(function () {
+  'use strict';
+
+  var RUTAS = window.RUTAS || {};
+  var CLAVE = 'agencia-ia:guia:v1';
+  var estado = { ruta: 'cero', hecho: {} };
+  var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* ---------- estado guardado ---------- */
+  try {
+    var guardado = JSON.parse(localStorage.getItem(CLAVE) || 'null');
+    if (guardado && typeof guardado === 'object') {
+      if (RUTAS[guardado.ruta]) estado.ruta = guardado.ruta;
+      if (guardado.hecho && typeof guardado.hecho === 'object') estado.hecho = guardado.hecho;
+    }
+  } catch (e) { /* sin guardado: la guía anda igual */ }
+
+  function guardar() {
+    try { localStorage.setItem(CLAVE, JSON.stringify(estado)); } catch (e) { /* sin guardado */ }
+  }
+
+  function escapar(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  /* ---------- hoja de ruta ---------- */
+  function tareasDeRuta(rid) {
+    var out = [];
+    RUTAS[rid].etapas.forEach(function (e, k) {
+      e.tareas.forEach(function (t, j) { out.push(rid + '-' + (k + 1) + '-' + (j + 1)); });
+    });
+    return out;
+  }
+
+  function pintarRuta() {
+    var rid = estado.ruta;
+    var r = RUTAS[rid];
+    if (!r) return;
+
+    var seg = $('#seg-ruta');
+    $$('#seg-ruta button').forEach(function (b) {
+      b.setAttribute('aria-selected', b.dataset.ruta === rid ? 'true' : 'false');
+    });
+    if (seg) seg.setAttribute('data-activa', rid);
+
+    $('#ruta-nombre').textContent = r.nombre;
+    $('#ruta-desc').textContent = r.desc;
+
+    var html = r.etapas.map(function (e, k) {
+      var tareas = e.tareas.map(function (t, j) {
+        var id = rid + '-' + (k + 1) + '-' + (j + 1);
+        var on = !!estado.hecho[id];
+        return '<li class="tarea' + (on ? ' hecha' : '') + '">' +
+          '<button type="button" class="tick" data-tick="' + id + '" aria-pressed="' + on + '" ' +
+          'aria-label="Marcar como hecho: ' + escapar(t) + '"></button>' +
+          '<span>' + escapar(t) + '</span></li>';
+      }).join('');
+
+      return '<li class="etapa" data-etapa="' + k + '">' +
+        '<div class="etapa-cab"><span class="etapa-n' + '" aria-hidden="true">' + (k + 1) + '</span>' +
+        '<div><h3 class="etapa-t">' + escapar(e.t) + '</h3>' +
+        '<p class="etapa-para">' + escapar(e.para) + '</p></div></div>' +
+        '<ul class="tareas">' + tareas + '</ul>' +
+        '<p class="pasas"><b>Pasás a la siguiente cuando</b> ' + escapar(e.pasas) + '</p>' +
+        (e.sigue ? '<button type="button" class="sigue" data-ir-ruta="' + e.sigue.ruta + '">' +
+          escapar(e.sigue.txt) + '</button>' : '') +
+        '</li>';
+    }).join('');
+
+    $('#etapas').innerHTML = html;
+    progreso();
+  }
+
+  function progreso() {
+    var ids = tareasDeRuta(estado.ruta);
+    var hechas = ids.filter(function (id) { return estado.hecho[id]; }).length;
+    var pct = ids.length ? Math.round((hechas / ids.length) * 100) : 0;
+
+    $('#ruta-cuenta').textContent = hechas + ' de ' + ids.length;
+    $('#ruta-barra').style.width = pct + '%';
+    var ib = $('#indice-barra'), ic = $('#indice-cuenta');
+    if (ib) ib.style.width = pct + '%';
+    if (ic) ic.textContent = hechas + ' de ' + ids.length;
+
+    $$('#etapas .etapa').forEach(function (li) {
+      var tk = $$('.tick', li);
+      var todas = tk.length > 0 && tk.every(function (b) { return b.getAttribute('aria-pressed') === 'true'; });
+      li.classList.toggle('hecha', todas);
+      var n = $('.etapa-n', li);
+      if (n) n.textContent = todas ? '✓' : String(Number(li.dataset.etapa) + 1);
+    });
+
+    var c5 = $$('[data-tick^="paso-"]').filter(function (b) { return estado.hecho[b.dataset.tick]; }).length;
+    var cc = $('#cinco-cuenta');
+    if (cc) cc.textContent = c5 + ' de 5';
+  }
+
+  /* ---------- clicks ---------- */
+  document.addEventListener('click', function (ev) {
+    var tk = ev.target.closest('.tick[data-tick]');
+    if (tk) {
+      var id = tk.dataset.tick;
+      var on = !estado.hecho[id];
+      if (on) estado.hecho[id] = true; else delete estado.hecho[id];
+      tk.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var li = tk.closest('.tarea');
+      if (li) li.classList.toggle('hecha', on);
+      guardar(); progreso();
+      return;
+    }
+
+    var sb = ev.target.closest('#seg-ruta button[data-ruta]');
+    if (sb) {
+      estado.ruta = sb.dataset.ruta;
+      guardar(); pintarRuta();
+      return;
+    }
+
+    var ir = ev.target.closest('[data-ir-ruta]');
+    if (ir) {
+      estado.ruta = ir.dataset.irRuta;
+      guardar(); pintarRuta();
+      var destino = $('#ruta');
+      if (destino) destino.scrollIntoView({ behavior: menosMovimiento ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
+
+    var nav = ev.target.closest('#nav-abrir');
+    if (nav) {
+      var panel = $('#nav-movil');
+      var abierto = panel.hasAttribute('hidden') ? false : true;
+      if (abierto) { panel.setAttribute('hidden', ''); nav.setAttribute('aria-expanded', 'false'); }
+      else { panel.removeAttribute('hidden'); nav.setAttribute('aria-expanded', 'true'); }
+      return;
+    }
+
+    if (ev.target.closest('#nav-movil a')) {
+      var p2 = $('#nav-movil');
+      var b2 = $('#nav-abrir');
+      if (p2) p2.setAttribute('hidden', '');
+      if (b2) b2.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ---------- barra pegada ---------- */
+  var barra = $('#barra');
+  var centinela = $('#centinela');
+  if (barra && centinela && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (ents) {
+      barra.classList.toggle('pegada', !ents[0].isIntersecting);
+    }, { threshold: 0 }).observe(centinela);
+  } else if (barra) {
+    barra.classList.add('pegada');
+  }
+
+  /* ---------- indice: donde estas parado ---------- */
+  if ('IntersectionObserver' in window) {
+    var links = $$('.indice a[href^="#"], .tablilla a[href^="#"]');
+    var secs = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); }).filter(Boolean);
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) {
+          a.setAttribute('aria-current', a.getAttribute('href') === '#' + en.target.id ? 'true' : 'false');
+        });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    secs.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---------- animacion de entrada ----------
+     Con red de seguridad: si el observer no dispara, el contenido se muestra igual. */
+  var revelar = $$('.reveal');
+  function mostrar(el) { el.classList.add('in'); }
+
+  if (menosMovimiento || !('IntersectionObserver' in window)) {
+    revelar.forEach(mostrar);
+  } else {
+    var ior = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (en.isIntersecting) { mostrar(en.target); ior.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    revelar.forEach(function (el) { ior.observe(el); });
+
+    // lo que ya está en pantalla se muestra sin esperar al observer
+    requestAnimationFrame(function () {
+      revelar.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) mostrar(el);
+      });
+    });
+
+    // y si a los 2 segundos no se reveló nada, se muestra todo
+    setTimeout(function () {
+      if (!document.querySelector('.reveal.in')) revelar.forEach(mostrar);
+    }, 2000);
+  }
+
+  /* ---------- glosario: filtro ---------- */
+  var buscador = $('#buscar-glosario');
+  if (buscador) {
+    var pliegues = $$('.glos-t');
+    var vacio = $('#glos-vacio');
+    var normal = function (s) {
+      return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    };
+    buscador.addEventListener('input', function () {
+      var q = normal(buscador.value.trim());
+      var vistos = 0;
+      pliegues.forEach(function (t) {
+        var texto = normal(t.textContent);
+        var ok = !q || texto.indexOf(q) !== -1;
+        t.hidden = !ok;
+        if (ok) vistos++;
+      });
+      if (vacio) vacio.hidden = vistos !== 0;
+    });
+  }
+
+  /* ---------- arranque ---------- */
+  $$('[data-tick^="paso-"]').forEach(function (b) {
+    b.setAttribute('aria-pressed', estado.hecho[b.dataset.tick] ? 'true' : 'false');
+    var li = b.closest('.tarea');
+    if (li) li.classList.toggle('hecha', !!estado.hecho[b.dataset.tick]);
+  });
+
+  if ($('#etapas')) { pintarRuta(); progreso(); }
+})();
+
+</script>
+</body>
+</html>
